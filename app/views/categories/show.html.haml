@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @category.name
+%p
+  %b Budget:
+  = @category.budget
+%p
+  %b Order:
+  = @category.order
+
+= link_to 'Edit', edit_category_path(@category)
+\|
+= link_to 'Back', categories_path
