@@ -1,4 +1,6 @@
 Nikomaki::Application.routes.draw do
+  resources :accounts
+
   resources :payments
 
   # The priority is based upon order of creation: first created -> highest priority.
