@@ -1,0 +1,34 @@
+= form_for @payment do |f|
+  - if @payment.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@payment.errors.count, "error")} prohibited this payment from being saved:"
+      %ul
+        - @payment.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :place
+    = f.text_field :place
+  .field
+    = f.label :amount
+    = f.number_field :amount
+  .field
+    = f.label :comment
+    = f.text_area :comment
+  .field
+    = f.label :meta
+    = f.text_area :meta
+  .field
+    = f.label :paid_at
+    = f.datetime_select :paid_at
+  .field
+    = f.label :subcategory
+    = f.text_field :subcategory
+  .field
+    = f.label :bill
+    = f.text_field :bill
+  .field
+    = f.label :account
+    = f.text_field :account
+  .actions
+    = f.submit 'Save'

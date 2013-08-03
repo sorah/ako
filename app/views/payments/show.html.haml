@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Place:
+  = @payment.place
+%p
+  %b Amount:
+  = @payment.amount
+%p
+  %b Comment:
+  = @payment.comment
+%p
+  %b Meta:
+  = @payment.meta
+%p
+  %b Paid at:
+  = @payment.paid_at
+%p
+  %b Subcategory:
+  = @payment.subcategory
+%p
+  %b Bill:
+  = @payment.bill
+%p
+  %b Account:
+  = @payment.account
+
+= link_to 'Edit', edit_payment_path(@payment)
+\|
+= link_to 'Back', payments_path

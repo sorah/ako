@@ -1,0 +1,33 @@
+%h1 Listing payments
+
+%table
+  %tr
+    %th Place
+    %th Amount
+    %th Comment
+    %th Meta
+    %th Paid at
+    %th Subcategory
+    %th Bill
+    %th Account
+    %th
+    %th
+    %th
+
+  - @payments.each do |payment|
+    %tr
+      %td= payment.place
+      %td= payment.amount
+      %td= payment.comment
+      %td= payment.meta
+      %td= payment.paid_at
+      %td= payment.subcategory
+      %td= payment.bill
+      %td= payment.account
+      %td= link_to 'Show', payment
+      %td= link_to 'Edit', edit_payment_path(payment)
+      %td= link_to 'Destroy', payment, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Payment', new_payment_path
