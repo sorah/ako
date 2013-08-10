@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'puma'
 gem 'haml-rails'
 gem 'font-awesome-rails'
+gem 'skeleton-rails'
 
 group :test, :development do
   gem 'spring'
