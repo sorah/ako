@@ -5,7 +5,7 @@ class CreateBills < ActiveRecord::Migration
       t.string :name
       t.text :meta
       t.datetime :paid_at
-      t.reference :account
+      t.references :account
 
       t.timestamps
     end
