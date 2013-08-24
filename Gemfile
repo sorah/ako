@@ -35,6 +35,8 @@ gem 'skeleton-rails'
 group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
+
+  gem 'database_cleaner'
 end
 
 group :doc do

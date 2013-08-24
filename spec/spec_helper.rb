@@ -4,6 +4,23 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
+require 'database_cleaner'
+DatabaseCleaner.strategy = :transaction
+
+module DatabaseCleanerEnabler
+  def self.included(klass)
+    klass.instance_eval do
+      before(:each) do
+        DatabaseCleaner.start
+      end
+
+      after(:each) do
+        DatabaseCleaner.clean
+      end
+    end
+  end
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -39,4 +56,6 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  config.include DatabaseCleanerEnabler, clean_db: true
 end
