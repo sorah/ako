@@ -7,6 +7,9 @@ require 'rspec/autorun'
 require 'database_cleaner'
 DatabaseCleaner.strategy = :transaction
 
+require 'factory_girl'
+FactoryGirl.find_definitions
+
 module DatabaseCleanerEnabler
   def self.included(klass)
     klass.instance_eval do
