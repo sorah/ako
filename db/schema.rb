@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20130824062646) do
     t.text     "meta"
     t.datetime "paid_at"
     t.integer  "place_id"
-    t.integer  "subcategory_id"
+    t.integer  "sub_category_id"
     t.integer  "bill_id"
     t.integer  "account_id"
     t.datetime "created_at"

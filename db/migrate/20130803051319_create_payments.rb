@@ -6,7 +6,7 @@ class CreatePayments < ActiveRecord::Migration
       t.text :meta
       t.datetime :paid_at
       t.references :place
-      t.references :subcategory
+      t.references :sub_category
       t.references :bill
       t.references :account
 

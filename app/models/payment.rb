@@ -1,6 +1,6 @@
 class Payment < ActiveRecord::Base
   has_one :bill
-  belongs_to :subcategory
+  belongs_to :sub_category
   belongs_to :place
   belongs_to :account
 
