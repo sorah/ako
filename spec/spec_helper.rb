@@ -8,7 +8,7 @@ require 'database_cleaner'
 DatabaseCleaner.strategy = :transaction
 
 require 'factory_girl'
-FactoryGirl.find_definitions
+# FactoryGirl.find_definitions
 
 module DatabaseCleanerEnabler
   def self.included(klass)
@@ -61,4 +61,5 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include DatabaseCleanerEnabler, clean_db: true
+  config.include FactoryGirl::Syntax::Methods
 end
