@@ -77,4 +77,8 @@ RSpec.configure do |config|
   config.include DatabaseCleanerEnabler, clean_db: true
   config.include ARLogEnabler, ar_log: true
   config.include FactoryGirl::Syntax::Methods
+
+  config.before(:all) do
+    FactoryGirl.reload
+  end
 end
