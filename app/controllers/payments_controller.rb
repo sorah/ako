@@ -62,6 +62,7 @@ class PaymentsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_payment
       @payment = Payment.find(params[:id])
@@ -69,6 +70,6 @@ class PaymentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params
-      params.require(:payment).permit(:place, :amount, :comment, :meta, :paid_at, :subcategory, :bill, :account)
+      params.require(:payment).permit(:place_id, :amount, :comment, :paid_at, :sub_category_id, :bill_id, :account_id)
     end
 end
