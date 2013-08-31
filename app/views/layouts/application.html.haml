@@ -9,5 +9,16 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    = yield
+    %nav.navbar.navbar-default{role: 'navigation'}
+      .navbar-header
+        %button.navbar-toggle{type: 'button', data: {toggle: 'collapse', target: ".navbar-ex1-collapse"}}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+        = link_to 'Nikomaki', '/', class: 'navbar-brand'
+
+      .collapse.navbar-collapse.navbar-ex1-collapse
+        %ul.nav.navbar-nav
+          %li= link_to 'Payments', payments_path
+    .container
+      = yield
 
