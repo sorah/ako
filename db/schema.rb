@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130824062646) do
+ActiveRecord::Schema.define(version: 20130831081049) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20130824062646) do
 
   create_table "bills", force: true do |t|
     t.integer  "amount"
-    t.string   "name"
+    t.string   "name",       default: ""
     t.text     "meta"
     t.datetime "paid_at"
     t.integer  "account_id"
@@ -33,11 +33,11 @@ ActiveRecord::Schema.define(version: 20130824062646) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.integer  "budget"
-    t.integer  "order"
+    t.integer  "budget",     default: 0
+    t.integer  "order",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "fixed"
+    t.boolean  "fixed",      default: false
   end
 
   create_table "options", force: true do |t|
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20130824062646) do
 
   create_table "payments", force: true do |t|
     t.integer  "amount"
-    t.text     "comment"
+    t.text     "comment",         default: ""
     t.text     "meta"
     t.datetime "paid_at"
     t.integer  "place_id"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20130824062646) do
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "fixed"
+    t.boolean  "fixed",           default: false
   end
 
   create_table "places", force: true do |t|
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20130824062646) do
   create_table "sub_categories", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.integer  "order"
+    t.integer  "order",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
