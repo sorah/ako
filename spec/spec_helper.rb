@@ -24,6 +24,20 @@ module DatabaseCleanerEnabler
   end
 end
 
+module ARLogEnabler
+  def self.included(klass)
+    klass.instance_eval do
+      before(:each) do
+        ActiveRecord::Base.logger = ActiveSupport::Logger.new($stdout)
+      end
+
+      after(:each) do
+        ActiveRecord::Base.logger = nil
+      end
+    end
+  end
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -61,5 +75,6 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include DatabaseCleanerEnabler, clean_db: true
+  config.include ARLogEnabler, ar_log: true
   config.include FactoryGirl::Syntax::Methods
 end
