@@ -6,6 +6,9 @@ class Payment < ActiveRecord::Base
 
   serialize :meta, Hash
 
+  validates_presence_of :amount
+  validates_presence_of :paid_at
+
   # default_scope do
   #   joins(:sub_category).select('*,`sub_categories`.`category_id` AS `category_id`')
   # end
