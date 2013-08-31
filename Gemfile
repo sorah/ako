@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'puma'
 gem 'haml-rails'
 gem 'font-awesome-rails'
-gem 'skeleton-rails'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', ref: '3'
 
 group :test, :development do
   gem 'spring'
