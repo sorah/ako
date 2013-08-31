@@ -41,6 +41,10 @@ class Payment < ActiveRecord::Base
     end
   end
 
+  def paid_at
+    attributes['paid_at'] ||= Time.now
+  end
+
   def category(reload=nil)
     @category = nil if reload || attributes['category_id'].nil?
     return @category if @category
