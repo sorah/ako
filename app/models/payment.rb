@@ -6,6 +6,7 @@ class Payment < ActiveRecord::Base
 
   serialize :meta, Hash
 
+  validates_numericality_of :amount, greater_than_or_equal_to: 0
   validates_presence_of :amount
   validates_presence_of :paid_at
 
