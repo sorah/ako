@@ -4,6 +4,8 @@ class Payment < ActiveRecord::Base
   belongs_to :place
   belongs_to :account
 
+  serialize :meta, Hash
+
   # default_scope do
   #   joins(:sub_category).select('*,`sub_categories`.`category_id` AS `category_id`')
   # end

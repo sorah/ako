@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :payment do
     amount 100
     comment "Hello"
-    meta({"a" => "b"}.to_yaml)
+    meta "a" => "b"
     paid_at Time.now
     fixed false
 
