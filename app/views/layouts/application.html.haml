@@ -1,0 +1,13 @@
+!!! 5
+- page_title = yield(:page_title)
+- page_title = nil if page_title.empty?
+%html
+  %head
+    %meta{charset: 'utf-8'}
+    %title #{page_title && "#{page_title} - "}Nikomaki
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    = yield
+
