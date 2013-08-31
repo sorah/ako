@@ -103,9 +103,58 @@ describe Payment do
     end
 
     context "with fiscal cal" do
-      let(:arg) { stub("fiscal", range_in_time: (Date.new(2013, 5, 1) .. Date.new(2013, 5, 31))) }
+      let(:arg) { double("fiscal", range_in_time: (Date.new(2013, 5, 1) .. Date.new(2013, 5, 31))) }
 
       it { should == Payment.where(paid_at: (Date.new(2013, 5, 1) .. Date.new(2013, 5, 31))) }
+    end
+  end
+
+  describe "#category", clean_db: true do
+    let(:sub_category) { create(:sub_category) }
+    let(:payment_new)  { create(:payment, sub_category: sub_category)  }
+    let(:payment) { payment_new }
+
+    subject { payment.category }
+
+    it "returns category via sub_category" do
+      expect(payment.category).to eq(sub_category.category)
+    end
+
+    context "when coming from .find" do
+      let(:payment) { Payment.find(payment_new.id) }
+
+      it "returns category via sub_category" do
+        expect(payment.category).to eq(sub_category.category)
+      end
+    end
+
+    context "when coming from relation" do
+      let(:payment) { Payment.where(id: payment_new.id).first }
+
+      it "returns category via sub_category" do
+        expect(payment.category).to eq(sub_category.category)
+      end
+    end
+
+    describe "reloading" do
+      let(:another_sub_category) { create(:sub_category, name: '2') }
+
+      it "can be reloaded" do
+        payment.category # to load
+
+        Payment.find(payment_new.id) \
+               .update_attributes!(sub_category: another_sub_category)
+
+        expect(payment.reload.category).to eq(another_sub_category.category)
+      end
+    end
+
+    describe "saving" do
+      it "can be saved" do
+        payment.category # to load
+        payment.comment = "Lunch"
+        expect { payment.save! }.to_not raise_error
+      end
     end
   end
 end

@@ -4,6 +4,10 @@ class Payment < ActiveRecord::Base
   belongs_to :place
   belongs_to :account
 
+  # default_scope do
+  #   joins(:sub_category).select('*,`sub_categories`.`category_id` AS `category_id`')
+  # end
+
   scope :in, ->(fiscal_date_or_range) do
     if fiscal_date_or_range.respond_to?(:range_in_time)
       range = fiscal_date_or_range.range_in_time
@@ -32,7 +36,17 @@ class Payment < ActiveRecord::Base
     end
   end
 
-  def category
-    # TODO
+  def category(reload=nil)
+    @category = nil if reload || attributes['category_id'].nil?
+    return @category if @category
+
+    @category = Category.joins(:sub_categories) \
+                        .where(sub_categories: {id: self.sub_category_id}).first
+    attributes['category_id'] = @category.id
+    return @category
+  end
+
+  def category_id
+    attributes['category_id'] ||= category.id
   end
 end
