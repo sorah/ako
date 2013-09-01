@@ -14,11 +14,14 @@
         %button.navbar-toggle{type: 'button', data: {toggle: 'collapse', target: ".navbar-ex1-collapse"}}
           %span.sr-only Toggle navigation
           %span.icon-bar
+          %span.icon-bar
         = link_to 'Nikomaki', '/', class: 'navbar-brand'
 
       .collapse.navbar-collapse.navbar-ex1-collapse
         %ul.nav.navbar-nav
           %li= link_to 'Payments', payments_path
+          %li= link_to 'Accounts', accounts_path
+          %li= link_to 'Categories', categories_path
     .container
       = yield
 
