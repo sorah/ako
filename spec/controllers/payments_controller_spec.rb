@@ -19,6 +19,18 @@ describe PaymentsController, clean_db: true do
       get :index, {}, valid_session
       assigns(:payments).should eq([payment])
     end
+
+    it "sorts payments to the later paid first" do
+      base = Time.now
+
+      payment.destroy!
+      first = create(:payment, paid_at: base + 30)
+      last = create(:payment, paid_at: base - 30)
+      middle = create(:payment, paid_at: base)
+
+      get :index, {}, valid_session
+      expect(assigns(:payments)).to eq([first, middle, last])
+    end
   end
 
   describe "GET show" do
