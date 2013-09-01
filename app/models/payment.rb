@@ -47,16 +47,16 @@ class Payment < ActiveRecord::Base
   end
 
   def category(reload=nil)
-    @category = nil if reload || attributes['category_id'].nil?
+    @category = nil if reload || attributes.key?('category_id')
     return @category if @category
 
     @category = Category.joins(:sub_categories) \
                         .where(sub_categories: {id: self.sub_category_id}).first
-    attributes['category_id'] = @category.id
+    attributes['category_id'] = @category.try(:id)
     return @category
   end
 
   def category_id
-    attributes['category_id'] ||= category.id
+    category.try(:id)
   end
 end
