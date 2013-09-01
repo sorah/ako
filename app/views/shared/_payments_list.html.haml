@@ -1,0 +1,34 @@
+- payments ||= []
+- panel_title ||= nil
+
+.panel.panel-default
+  - if panel_title
+    .panel-heading
+      .panel-title= panel-title
+
+  %table.table.table-hover
+    %colgroup
+      %col{style: 'width: 10%', span: 1}
+      %col{style: 'width: 8%', span: 1}
+      %col{style: 'width: 10%', span: 1}
+      %col{style: 'width: 15%', span: 1}
+      %col{style: 'width: 26%', span: 1}
+      %col{style: 'width: 30%', span: 1}
+    %thead
+      %tr
+        %th Paid at
+        %th Account
+        %th Amount
+        %th Category
+        %th Place
+        %th Comment
+    %tbody
+      - payments.each do |payment|
+        %tr.payment-row{data: {id: payment.id}}
+          %td
+            %time.paid-at{datetime: payment.paid_at.xmlschema}=l payment.paid_at, format: :short
+          %td.account{data: {id: payment.account_id}}= payment.account.try(:name) || ''
+          %td.amount= payment.amount
+          %td.category{data: payment.category ? {category_name: payment.category.name, category_id: payment.category_id, sub_category_name: payment.sub_category.name, sub_category_id: payment.sub_category.id} : {}}= payment.category ? "#{payment.category.name} > #{payment.sub_category.name}" : ''
+          %td.place{data: {id: payment.place_id}}= payment.place.try(:name)
+          %td= payment.comment.lines.map(&:chomp).join(' ')[0, 100]
