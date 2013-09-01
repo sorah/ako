@@ -1,1 +1,8 @@
 @import "bootstrap";
+
+.datetime-select {
+  .form-control {
+    width: auto;
+    display: inline;
+  }
+}
