@@ -13,7 +13,8 @@
       %col{style: 'width: 10%', span: 1}
       %col{style: 'width: 15%', span: 1}
       %col{style: 'width: 26%', span: 1}
-      %col{style: 'width: 30%', span: 1}
+      %col{style: 'width: 20%', span: 1}
+      %col{style: 'width: 10%', span: 1}
     %thead
       %tr
         %th Paid at
@@ -22,6 +23,7 @@
         %th Category
         %th Place
         %th Comment
+        %th Actions
     %tbody
       - payments.each do |payment|
         %tr.payment-row{data: {id: payment.id}}
@@ -32,3 +34,9 @@
           %td.category{data: payment.category ? {category_name: payment.category.name, category_id: payment.category_id, sub_category_name: payment.sub_category.name, sub_category_id: payment.sub_category.id} : {}}= payment.category ? "#{payment.category.name} > #{payment.sub_category.name}" : ''
           %td.place{data: {id: payment.place_id}}= payment.place.try(:name)
           %td= payment.comment.lines.map(&:chomp).join(' ')[0, 100]
+          %td
+            = link_to edit_payment_path(payment), title: 'Edit' do
+              %i.icon-pencil.icon-large
+            = link_to payment, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
+              %i.icon-remove.icon-large
+
