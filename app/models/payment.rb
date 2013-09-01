@@ -43,7 +43,7 @@ class Payment < ActiveRecord::Base
   end
 
   def paid_at
-    attributes['paid_at'] ||= Time.now
+    attributes['paid_at'] || self.created_at
   end
 
   def category(reload=nil)
