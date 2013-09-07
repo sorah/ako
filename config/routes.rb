@@ -1,4 +1,6 @@
 Nikomaki::Application.routes.draw do
+  resources :places
+
   resources :categories
 
   resources :accounts

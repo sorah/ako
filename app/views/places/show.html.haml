@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @place.name
+%p
+  %b Foursquare venue:
+  = @place.foursquare_venue_id
+%p
+  %b Latitude:
+  = @place.latitude
+%p
+  %b Longitude:
+  = @place.longitude
+
+= link_to 'Edit', edit_place_path(@place)
+\|
+= link_to 'Back', places_path
