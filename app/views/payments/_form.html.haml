@@ -1,4 +1,4 @@
-= form_for @payment, html: {class: 'form-horizontal'} do |f|
+= form_for @payment, html: {class: 'payment_form form-horizontal', data: {id: @payment.id}} do |f|
   - if @payment.errors.any?
     #error_explanation
       %h2= "#{pluralize(@payment.errors.count, "error")} prohibited this payment from being saved:"
@@ -11,10 +11,19 @@
     .col-md-10
       = f.number_field :amount, class: 'form-control input-lg'
 
-  .form-group
-    = f.label :place, class: 'col-md-2 control-label'
+  .form-group.payment-place-field
+    = f.label :place_name, class: 'col-md-2 control-label'
     .col-md-10
-      = f.text_field :place, class: 'form-control'
+      .place_id_field.form-control{style: @payment.place ? '' : 'display: none;'}
+        - if @payment.place
+          = @payment.place.name
+          = f.hidden_field :place_id
+      .place_name_field{style: @payment.place && 'display: none;'}
+        - if @payment.place
+          = f.text_field :place_name, class: 'form-control', value: ''
+        - else
+          = f.text_field :place_name, class: 'form-control'
+        .place_name_candidates
   .form-group
     = f.label :comment, class: 'col-md-2 control-label'
     .col-md-10
