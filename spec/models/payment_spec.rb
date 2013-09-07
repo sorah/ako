@@ -142,7 +142,7 @@ describe Payment do
       it "can be reloaded" do
         payment.category # to load
 
-        Payment.find(payment_new.id) \
+        Payment.find(payment.id) \
                .update_attributes!(sub_category: another_sub_category)
 
         expect(payment.reload.category).to eq(another_sub_category.category)
