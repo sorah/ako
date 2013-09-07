@@ -61,6 +61,12 @@ class PlacesController < ApplicationController
     end
   end
 
+  def candidates_for_payment
+    @places = Place.where('name like ?', params[:name].gsub(/[%_]/,'\\\\\0') +'%')
+
+    render :candidates_for_payment, layout: false
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_place

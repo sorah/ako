@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe PlacesController do
+describe PlacesController, clean_db: true do
 
   # This should return the minimal set of attributes required to create a valid
   # Place. As you add validations to Place, be sure to
@@ -157,4 +157,16 @@ describe PlacesController do
     end
   end
 
+  describe "GET candidates_for_payment" do
+    it "renders candidates for payment" do
+      a = create(:place, name: 'aab')
+      b = create(:place, name: 'abb')
+      c = create(:place, name: 'abc')
+
+      post :candidates_for_payment, {name: 'ab'}, valid_session
+
+      expect(assigns(:places)).to eq [b,c]
+      expect(response).to render_template("candidates_for_payment")
+    end
+  end
 end

@@ -1,5 +1,9 @@
 Nikomaki::Application.routes.draw do
-  resources :places
+  resources :places do
+    collection do
+      get :candidates_for_payment
+    end
+  end
 
   resources :categories
 
