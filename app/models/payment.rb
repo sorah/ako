@@ -47,16 +47,17 @@ class Payment < ActiveRecord::Base
   end
 
   def category(reload=nil)
-    @category = nil if reload || attributes.key?('category_id')
-    return @category if @category
-
-    @category = Category.joins(:sub_categories) \
-                        .where(sub_categories: {id: self.sub_category_id}).first
-    attributes['category_id'] = @category.try(:id)
-    return @category
+    @category = nil if reload
+    @category ||= Category.joins(:sub_categories) \
+                          .where(sub_categories: {id: self.sub_category_id}).first
   end
 
   def category_id
     category.try(:id)
+  end
+
+  def reload(*)
+    @category = nil
+    super
   end
 end
