@@ -6,3 +6,23 @@
     display: inline;
   }
 }
+
+.btnish-radio {
+  input {
+    display: none;
+  }
+
+  input + label {
+    @extend .btn;
+    @extend .btn-default;
+  }
+
+  input:checked + label {
+    @extend .btn-primary;
+  }
+
+  label {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+}
