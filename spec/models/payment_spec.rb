@@ -157,4 +157,45 @@ describe Payment do
       end
     end
   end
+
+  describe "#place_name", clean_db: true do
+    subject(:payment) { build(:payment) }
+
+    context "when specified" do
+      context "and place exists" do
+        it "sets place_id" do
+          place = create(:place)
+
+          expect {
+            payment.place_name = place.name
+          }.to change { payment.place }.to(place)
+        end
+      end
+
+      context "and place doesn't exist" do
+        it "creates place" do
+          expect {
+            payment.place_name = 'somewhere'
+          }.to change { Place.count }.by(1)
+
+          expect(Place.last.name).to eq 'somewhere'
+          expect(payment.place).to eq Place.last
+        end
+      end
+    end
+
+    context "when not specified" do
+      context "and place_id is present" do
+        before do
+          payment.place = create(:place)
+        end
+
+        it "leaves place as is" do
+          expect {
+            payment.place_name = ""
+          }.to_not change { payment.place }
+        end
+      end
+    end
+  end
 end
