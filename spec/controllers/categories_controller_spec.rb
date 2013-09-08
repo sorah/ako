@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe CategoriesController do
+describe CategoriesController, clean_db: true do
 
   # This should return the minimal set of attributes required to create a valid
   # Category. As you add validations to Category, be sure to
@@ -32,9 +32,20 @@ describe CategoriesController do
 
   describe "GET index" do
     it "assigns all categories as @categories" do
-      category = Category.create! valid_attributes
+      category = create(:category)
       get :index, {}, valid_session
       assigns(:categories).should eq([category])
+    end
+
+    it "considers order attribute" do
+      category_b = create(:category, order: 1)
+      category_c = create(:category, order: 2)
+      category_a = create(:category, order: 0)
+
+      categories = [category_a, category_b, category_c]
+
+      get :index, {}, valid_session
+      assigns(:categories).should eq(categories)
     end
   end
 
