@@ -9,10 +9,13 @@ initializer = ->
 
     show_place_candidates = ->
       name = place_name_field.val()
-      return if name.length == 0 || name.match(/^\s+$/)
+      candidates = self.find('.place_name_candidates')
+
+      if name.length == 0 || name.match(/^\s+$/)
+        candidates.hide()
+        return
 
       $.get '/places/candidates_for_payment', {name: name}, (html) ->
-        candidates = self.find('.place_name_candidates')
         candidates.html html
         candidates.find('li').click ->
           id = $(this).data('id')
