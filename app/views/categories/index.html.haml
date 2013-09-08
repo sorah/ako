@@ -1,22 +1,24 @@
 %h1 Listing categories
 
-%table
-  %tr
-    %th Name
-    %th Budget
-    %th Order
-    %th
-    %th
-    %th
-
-  - @categories.each do |category|
+%table.table.table-hover
+  %colgroup
+    %col{style: 'width: 50%;', span: 1}
+    %col{style: 'width: 30%;', span: 1}
+    %col{style: 'width: 10%;', span: 1}
+  %thead
     %tr
-      %td= category.name
-      %td= category.budget
-      %td= category.order
-      %td= link_to 'Show', category
-      %td= link_to 'Edit', edit_category_path(category)
-      %td= link_to 'Destroy', category, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Name
+      %th Budget
+      %th
+
+  %tbody
+    - @categories.each do |category|
+      %tr
+        %td= link_to category.name, category
+        %td= category.budget
+        %td
+          = link_to 'Edit', edit_category_path(category)
+          = link_to 'Destroy', category, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
