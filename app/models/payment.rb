@@ -10,6 +10,8 @@ class Payment < ActiveRecord::Base
   validates_presence_of :amount
   validates_presence_of :paid_at
 
+  before_validation :assign_paid_at
+
   # default_scope do
   #   joins(:sub_category).select('*,`sub_categories`.`category_id` AS `category_id`')
   # end
@@ -71,5 +73,11 @@ class Payment < ActiveRecord::Base
   def reload(*)
     @category = nil
     super
+  end
+
+  private
+
+  def assign_paid_at
+    self.paid_at = Time.now unless self.paid_at
   end
 end

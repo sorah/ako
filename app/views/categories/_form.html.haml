@@ -18,5 +18,20 @@
     = f.label :order, class: 'col-md-2 control-label'
     .col-md-10
       = f.number_field :order, class: 'form-control'
+  .form-group
+    = f.label :sub_categories, class: 'col-md-2 control-label'
+    .col-md-10
+      %table.table
+        %colgroup
+          %col{span: 1, style: 'width: 95%'}
+          %col{span: 1, style: 'width: 3%'}
+        %tbody.sub_category_form{data: {category_id: @category.id}}
+          = f.fields_for :sub_categories do |_f|
+            = render 'sub_category_fields', f: _f
+          %tr.add_fields_link
+            %td
+              = add_fields_link('Add sub category', f, :sub_categories,
+                insert_before: ".sub_category_form[data-category-id='#{@category.id}'] tr.add_fields_link")
   .actions
     = f.submit 'Save', class: 'btn btn-primary'
+

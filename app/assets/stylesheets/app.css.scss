@@ -26,3 +26,16 @@
     margin-right: 3px;
   }
 }
+
+.checkbox-label-only {
+  .labels { display: inline; }
+  input[type='checkbox'] {
+    display: none;
+
+
+    & + .labels label.unchecked { display: inline; }
+    & + .labels label.checked {   display: none; }
+    &:checked + .labels label.unchecked { display: none; }
+    &:checked + .labels label.checked { display: inline; }
+  }
+}
