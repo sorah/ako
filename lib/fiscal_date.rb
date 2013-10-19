@@ -101,8 +101,8 @@ module FiscalDate
       week_starts = Option[:week_starts]
 
       month.range.inject([]) do |result, day|
-        result << [] if result.empty? || day.wday == week_starts
-        result.last << day
+        result << [day, day] if result.empty? || day.wday == week_starts
+        result.last[1] = day
         result
       end.map.with_index do |days, i|
         self.new(month, i.succ, days.first .. days.last)
