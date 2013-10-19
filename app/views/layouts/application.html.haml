@@ -24,5 +24,7 @@
           %li= link_to 'Categories', categories_path
           %li= link_to 'Places', places_path
     .container
+      - if notice.present?
+        %p#notice= notice
       = yield
 
