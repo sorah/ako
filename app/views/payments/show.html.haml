@@ -1,6 +1,6 @@
 %p
   %b Place:
-  = @payment.place
+  = @payment.place.name
 %p
   %b Amount:
   = @payment.amount
@@ -8,20 +8,15 @@
   %b Comment:
   = @payment.comment
 %p
-  %b Meta:
-  = @payment.meta
-%p
   %b Paid at:
   = @payment.paid_at
 %p
-  %b Subcategory:
-  = @payment.subcategory
-%p
-  %b Bill:
-  = @payment.bill
+  %b Category:
+  #{@payment.category.name} - #{@payment.sub_category.name}
 %p
   %b Account:
-  = @payment.account
+  - if @payment.account
+    = @payment.account.name
 
 = link_to 'Edit', edit_payment_path(@payment)
 \|
