@@ -5,7 +5,7 @@ module FiscalDate
              when Date
                date_or_time
              when Time
-               time.to_date
+               date_or_time.to_date
              else
                raise TypeError, "`date_or_time' must be an Date or Time"
              end
