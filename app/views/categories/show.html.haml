@@ -1,12 +1,16 @@
-%p
-  %b Name:
-  = @category.name
+- content_for(:page_title) { "#{@category.name} - Category" }
+
+%h1 Category: #{@category.name}
+
 %p
   %b Budget:
   = @category.budget
-%p
-  %b Order:
-  = @category.order
+
+%h3 Sub categories
+
+%ul
+  - @category.sub_categories.each do |sub_category|
+    %li= sub_category.name
 
 = link_to 'Edit', edit_category_path(@category)
 \|
