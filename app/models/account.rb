@@ -8,4 +8,8 @@ class Account < ActiveRecord::Base
   def icon
     attributes["icon"] || 'usd'
   end
+
+  def icon_class
+    "icon-#{self.icon}"
+  end
 end

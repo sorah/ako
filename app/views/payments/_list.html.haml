@@ -1,42 +1,51 @@
 - payments ||= []
-- panel_title ||= nil
 
-.panel.panel-default
-  - if panel_title
-    .panel-heading
-      .panel-title= panel-title
+%section.payments
+  - grouped_payments = payments.group_by {|_| FiscalDate.locate_week(_.paid_at) }
+  - grouped_payments.each do |week, payments|
+    %section.payments-week.panel.panel-default
+      .panel-heading
+        .panel-title= week.to_s
 
-  %table.table.table-hover
-    %colgroup
-      %col{style: 'width: 10%', span: 1}
-      %col{style: 'width: 8%', span: 1}
-      %col{style: 'width: 10%', span: 1}
-      %col{style: 'width: 15%', span: 1}
-      %col{style: 'width: 26%', span: 1}
-      %col{style: 'width: 20%', span: 1}
-      %col{style: 'width: 10%', span: 1}
-    %thead
-      %tr
-        %th Paid at
-        %th Account
-        %th Amount
-        %th Category
-        %th Place
-        %th Comment
-        %th Actions
-    %tbody
-      - payments.each do |payment|
-        %tr.payment-row{data: {id: payment.id}}
-          %td
-            %time.paid-at{datetime: payment.paid_at.xmlschema}=l payment.paid_at, format: :short
-          %td.account{data: {id: payment.account_id}}= payment.account.try(:name) || ''
-          %td.amount= payment.amount
-          %td.category{data: payment.category ? {category_name: payment.category.name, category_id: payment.category_id, sub_category_name: payment.sub_category.name, sub_category_id: payment.sub_category.id} : {}}= payment.category ? "#{payment.category.name} > #{payment.sub_category.name}" : ''
-          %td.place{data: {id: payment.place_id}}= payment.place.try(:name)
-          %td= payment.comment.lines.map(&:chomp).join(' ')[0, 100]
-          %td
-            = link_to edit_payment_path(payment), title: 'Edit' do
-              %i.icon-pencil.icon-large
-            = link_to payment, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
-              %i.icon-remove.icon-large
+      .panel-body
+        .payments-sub-head.row
+          .col-md-2{style: 'text-align: right;'} Paid At
+          .col-md-1 Account
+          .col-md-1 Category
+          .col-md-2 Amount
+          .col-md-2 Place
+          .col-md-3 Comment
+
+        - payments.each do |payment|
+          %section.payments-sub.row{data: {id: payment.id}}
+            .col-md-2{style: 'text-align: right;'}
+              %time.paid-at{datetime: payment.paid_at.xmlschema}=l payment.paid_at, format: :short
+            .col-md-1
+              -if payment.account
+                .account{data: {id: payment.account_id}}
+                  %i{class: payment.account.icon_class}
+                  = payment.account.name
+
+            .col-md-1
+              - if payment.category
+                - category = payment.category
+                - sub_category = payment.sub_category
+                .category{data: {category_name: category.name, category_id: category.id, sub_category_name: sub_category.name, sub_category_id: sub_category.id}} #{category.name} &gt; #{sub_category.name}
+
+            .col-md-2
+              .amount= payment.amount
+
+            .col-md-2
+              - if payment.place
+                %td.place{data: {id: payment.place_id}}= payment.place.name
+
+            .col-md-3
+              .comment= payment.comment.lines.map(&:chomp).join(' ')[0, 100]
+
+            .col-md-1
+              .actions
+                = link_to edit_payment_path(payment), title: 'Edit' do
+                  %i.icon-pencil.icon-large
+                = link_to payment, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
+                  %i.icon-remove.icon-large
 
