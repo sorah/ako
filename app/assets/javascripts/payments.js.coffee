@@ -24,8 +24,7 @@ initializer = ->
           ).show()
           place_name_area.hide()
           place_name_field.val('')
-
-    place_name_field.change(show_place_candidates)
+        candidates.show()
 
     place_name_field_timeout = null
     place_name_field.keyup ->
