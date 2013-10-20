@@ -94,6 +94,13 @@ module FiscalDate
     def ==(o)
       o.class == self.class && [self.month, self.year] == [o.month, o.year]
     end
+
+    alias eql? ==
+    alias equal? ==
+
+    def hash
+      [self.month, self.year].hash
+    end
   end
 
   class Week
@@ -152,8 +159,15 @@ module FiscalDate
 
     def ==(o)
       o.class == self.class && \
-        [self.number, self.month, self.range] \
-          == [o.number, o.month, o.range]
+        [self.number, self.month.number, self.month.year, self.range] \
+          == [o.number, o.month.number, o.month.year, o.range]
+    end
+
+    alias eql? ==
+    alias equal? ==
+
+    def hash
+      [self.number, self.month.number, self.month.year, self.range].hash
     end
   end
 end
