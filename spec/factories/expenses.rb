@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :payment do
+  factory :expense do
     amount 100
     comment "Hello"
     meta "a" => "b"

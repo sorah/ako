@@ -157,16 +157,16 @@ describe PlacesController, clean_db: true do
     end
   end
 
-  describe "GET candidates_for_payment" do
-    it "renders candidates for payment" do
+  describe "GET candidates_for_expense" do
+    it "renders candidates for expense" do
       a = create(:place, name: 'aab')
       b = create(:place, name: 'abb')
       c = create(:place, name: 'abc')
 
-      post :candidates_for_payment, {name: 'ab'}, valid_session
+      post :candidates_for_expense, {name: 'ab'}, valid_session
 
       expect(assigns(:places)).to eq [b,c]
-      expect(response).to render_template("candidates_for_payment")
+      expect(response).to render_template("candidates_for_expense")
     end
   end
 end

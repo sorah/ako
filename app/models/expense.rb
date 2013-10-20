@@ -1,4 +1,4 @@
-class Payment < ActiveRecord::Base
+class Expense < ActiveRecord::Base
   has_one :bill
   belongs_to :sub_category
   belongs_to :place

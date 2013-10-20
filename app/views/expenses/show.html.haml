@@ -1,0 +1,25 @@
+- if @expense.fixed
+  %p Fixed
+%p
+  %b Place:
+  = @expense.place.name
+%p
+  %b Amount:
+  = @expense.amount
+%p
+  %b Comment:
+  = @expense.comment
+%p
+  %b Paid at:
+  = @expense.paid_at
+%p
+  %b Category:
+  #{@expense.category.name} - #{@expense.sub_category.name}
+%p
+  %b Account:
+  - if @expense.account
+    = @expense.account.name
+
+= link_to 'Edit', edit_expense_path(@expense)
+\|
+= link_to 'Back', expenses_path

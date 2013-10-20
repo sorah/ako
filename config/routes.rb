@@ -1,7 +1,7 @@
 Nikomaki::Application.routes.draw do
   resources :places do
     collection do
-      get :candidates_for_payment
+      get :candidates_for_expense
     end
   end
 
@@ -9,7 +9,7 @@ Nikomaki::Application.routes.draw do
 
   resources :accounts
 
-  resources :payments
+  resources :expenses
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

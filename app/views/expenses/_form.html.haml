@@ -1,9 +1,9 @@
-= form_for @payment, html: {class: 'payment_form form-horizontal', data: {id: @payment.id}} do |f|
-  - if @payment.errors.any?
+= form_for @expense, html: {class: 'expense_form form-horizontal', data: {id: @expense.id}} do |f|
+  - if @expense.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@payment.errors.count, "error")} prohibited this payment from being saved:"
+      %h2= "#{pluralize(@expense.errors.count, "error")} prohibited this expense from being saved:"
       %ul
-        - @payment.errors.full_messages.each do |msg|
+        - @expense.errors.full_messages.each do |msg|
           %li= msg
 
   .form-group
@@ -11,15 +11,15 @@
     .col-md-10
       = f.number_field :amount, class: 'form-control input-lg'
 
-  .form-group.payment-place-field
+  .form-group.expense-place-field
     = f.label :place_name, class: 'col-md-2 control-label'
     .col-md-10
-      .place_id_field.form-control{style: @payment.place ? '' : 'display: none;'}
-        - if @payment.place
-          = @payment.place.name
+      .place_id_field.form-control{style: @expense.place ? '' : 'display: none;'}
+        - if @expense.place
+          = @expense.place.name
           = f.hidden_field :place_id
-      .place_name_field{style: @payment.place && 'display: none;'}
-        - if @payment.place
+      .place_name_field{style: @expense.place && 'display: none;'}
+        - if @expense.place
           = f.text_field :place_name, class: 'form-control', value: ''
         - else
           = f.text_field :place_name, class: 'form-control'

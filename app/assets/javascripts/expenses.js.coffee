@@ -1,5 +1,5 @@
 initializer = ->
-  $('.payment_form').each ->
+  $('.expense_form').each ->
     self = $(this)
 
     place_name_area = self.find('.place_name_field')
@@ -15,12 +15,12 @@ initializer = ->
         candidates.hide()
         return
 
-      $.get '/places/candidates_for_payment', {name: name}, (html) ->
+      $.get '/places/candidates_for_expense', {name: name}, (html) ->
         candidates.html html
         candidates.find('li').click ->
           id = $(this).data('id')
           place_fixed_area.text($(this).text()).append(
-            $("<input>").attr('name': 'payment[place_id]', 'type': 'hidden', 'value': id)
+            $("<input>").attr('name': 'expense[place_id]', 'type': 'hidden', 'value': id)
           ).show()
           place_name_area.hide()
           place_name_field.val('')

@@ -10,7 +10,7 @@ class PlacesController < ApplicationController
   # GET /places/1
   # GET /places/1.json
   def show
-    @payments = @place.payments
+    @expenses = @place.expenses
   end
 
   # GET /places/new
@@ -62,10 +62,10 @@ class PlacesController < ApplicationController
     end
   end
 
-  def candidates_for_payment
+  def candidates_for_expense
     @places = Place.where('name like ?', params[:name].gsub(/[%_]/,'\\\\\0') +'%')
 
-    render :candidates_for_payment, layout: false
+    render :candidates_for_expense, layout: false
   end
 
   private

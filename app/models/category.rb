@@ -8,8 +8,8 @@ class Category < ActiveRecord::Base
 
   accepts_nested_attributes_for :sub_categories, allow_destroy: true
 
-  def payments
-    Payment.joins(:sub_category) \
+  def expenses
+    Expense.joins(:sub_category) \
            .where(sub_categories: {category_id: self.id})
   end
 
