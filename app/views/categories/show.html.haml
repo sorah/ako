@@ -2,6 +2,9 @@
 
 %h1 Category: #{@category.name}
 
+- if @category.fixed
+  %p Fixed
+
 %p
   %b Budget:
   = @category.budget

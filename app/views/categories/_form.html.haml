@@ -19,6 +19,11 @@
     .col-md-10
       = f.number_field :order, class: 'form-control'
   .form-group
+    = f.label :fixed, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.check_box :fixed
+
+  .form-group
     = f.label :sub_categories, class: 'col-md-2 control-label'
     .col-md-10
       %table.table
