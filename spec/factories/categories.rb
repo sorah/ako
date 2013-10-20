@@ -11,8 +11,8 @@ FactoryGirl.define do
       end
 
       after(:create) do |category, evaluator|
-        evaluator.sub_categories_count.each do |i|
-          FactoryGirl.create(:sub_category, name: "sub_category#{i}", order: i)
+        evaluator.sub_categories_count.times do |i|
+          FactoryGirl.create(:sub_category, name: "sub_category#{i}", order: i, category_id: category.id)
         end
       end
     end
