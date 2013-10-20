@@ -146,6 +146,10 @@ module FiscalDate
       "#<FiscalDate::Week(#{self.month.year}/#{self.month.month} Week #{self.number}): #{range.inspect}>"
     end
 
+    def to_s
+      "#{self.month.year}/#{self.month.number}: Week #{self.number} (#{range.inspect})"
+    end
+
     def ==(o)
       o.class == self.class && \
         [self.number, self.month, self.range] \
