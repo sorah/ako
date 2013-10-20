@@ -14,7 +14,10 @@
   %tbody
     - @categories.each do |category|
       %tr
-        %td= link_to category.name, category
+        %td
+          = link_to category do
+            %i{class: category.icon_class}
+            = category.name
         %td= category.budget
         %td
           = link_to 'Edit', edit_category_path(category)

@@ -12,4 +12,12 @@ class Category < ActiveRecord::Base
     Payment.joins(:sub_category) \
            .where(sub_categories: {category_id: self.id})
   end
+
+  def icon
+    attributes["icon"] || 'shopping-cart'
+  end
+
+  def icon_class
+    "icon-#{self.icon}"
+  end
 end

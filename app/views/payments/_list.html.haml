@@ -30,7 +30,9 @@
               - if payment.category
                 - category = payment.category
                 - sub_category = payment.sub_category
-                .category{data: {category_name: category.name, category_id: category.id, sub_category_name: sub_category.name, sub_category_id: sub_category.id}} #{category.name} &gt; #{sub_category.name}
+                .category{data: {category_name: category.name, category_id: category.id, sub_category_name: sub_category.name, sub_category_id: sub_category.id}}
+                  %i{class: category.icon_class}
+                  #{category.name} &gt; #{sub_category.name}
 
             .col-md-2
               .amount= payment.amount
