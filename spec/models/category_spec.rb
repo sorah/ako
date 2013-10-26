@@ -18,4 +18,18 @@ describe Category do
       expect(subject).to eq expenses
     end
   end
+
+  describe ".total_budget" do
+    before do
+      create(:category, budget: 420)
+      create(:category, budget: 1220)
+      create(:category, budget: 880)
+    end
+
+    subject { described_class.total_budget }
+
+    it "calculates total budget" do
+      expect(subject).to eq 2520
+    end
+  end
 end

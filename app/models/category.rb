@@ -8,6 +8,12 @@ class Category < ActiveRecord::Base
 
   accepts_nested_attributes_for :sub_categories, allow_destroy: true
 
+  class << self
+    def total_budget
+      Category.pluck('budget').inject(:+)
+    end
+  end
+
   def expenses
     Expense.joins(:sub_category) \
            .where(sub_categories: {category_id: self.id})
