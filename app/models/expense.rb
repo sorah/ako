@@ -1,5 +1,5 @@
 class Expense < ActiveRecord::Base
-  has_one :bill
+  has_many :bills
   belongs_to :sub_category
   belongs_to :place
   belongs_to :account
