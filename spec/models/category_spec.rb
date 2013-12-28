@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Category do
-  describe "#expenses", :ar_log do
+  describe "#expenses" do
     let(:category) { create(:category, :with_sub_categories) }
 
     let!(:expenses) do
