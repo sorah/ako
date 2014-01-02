@@ -1,4 +1,5 @@
 class Expense < ActiveRecord::Base
+  # TODO: paid_at -> spent_at
   has_many :bills
   belongs_to :sub_category
   belongs_to :place
@@ -24,6 +25,27 @@ class Expense < ActiveRecord::Base
     end
 
     where(paid_at: range)
+  end
+
+  scope :on, ->(date) do
+    where(paid_at: date.to_time.beginning_of_day ... (date.to_time + 1.day).beginning_of_day)
+  end
+
+  scope :fixed, -> {
+    joins(sub_category: :category).
+    where('`expenses`.`fixed` = ? OR `categories`.`fixed` = ?', true, true)
+  }
+  scope :variable, -> {
+    joins(sub_category: :category).
+    where('`expenses`.`fixed` = ? AND `categories`.`fixed` = ?', false, false)
+  }
+
+  def fixed?
+    read_attribute(:fixed) || self.category.fixed?
+  end
+
+  def variable?
+    !fixed?
   end
 
   class << self

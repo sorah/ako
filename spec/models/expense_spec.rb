@@ -198,4 +198,94 @@ describe Expense do
       end
     end
   end
+
+  describe "#fixed?", :clean_db do
+    subject(:expense) { build(:expense) }
+    subject { expense.fixed? }
+
+    context "when it is marked as fixed expense" do
+      before do
+        expense.fixed = true
+      end
+
+      it { should be_true }
+    end
+
+    context "when its category is for fixed expenses" do
+      let(:sub_category) { create(:sub_category, category: create(:category, fixed: true)) }
+      before do
+        expense.sub_category = sub_category
+      end
+
+      it { should be_true }
+    end
+
+    it { should be_false }
+  end
+
+  describe "#variable?", :clean_db do
+    subject(:expense) { build(:expense) }
+    subject { expense.variable? }
+
+    context "when it is marked as fixed expense" do
+      before do
+        expense.fixed = true
+      end
+
+      it { should be_false }
+    end
+
+    context "when its category is for fixed expenses" do
+      let(:sub_category) { create(:sub_category, category: create(:category, fixed: true)) }
+      before do
+        expense.sub_category = sub_category
+      end
+
+      it { should be_false }
+    end
+
+    it { should be_true }
+  end
+
+  describe ".fixed", :clean_db do
+    subject { Expense.fixed }
+
+    let!(:category_a) { create(:sub_category, category: create(:category, fixed: true)) }
+    let!(:expense_a) { create(:expense, fixed: true) }
+    let!(:expense_b) { create(:expense, sub_category: category_a) }
+    let!(:expense_c) { create(:expense, fixed: false) }
+
+    it "includes fixed expenses" do
+      expect(subject).to include expense_a
+    end
+
+    it "includes expenses categorized as category for fixed expenses" do
+      expect(subject).to include expense_b
+    end
+
+    it "doesn't include non fixed expenses" do
+      expect(subject).to_not include expense_c
+    end
+  end
+
+  describe ".variable", :clean_db do
+    subject { Expense.variable }
+
+    let!(:category_a) { create(:sub_category, category: create(:category, fixed: true)) }
+    let!(:expense_a) { create(:expense, fixed: true) }
+    let!(:expense_b) { create(:expense, sub_category: category_a) }
+    let!(:expense_c) { create(:expense, fixed: false) }
+
+    it "doesn't include fixed expenses" do
+      expect(subject).to_not include expense_a
+    end
+
+    it "doesn't include expenses categorized as category for fixed expenses" do
+      expect(subject).to_not include expense_b
+    end
+
+    it "includes non fixed expenses" do
+      expect(subject).to include expense_c
+    end
+  end
 end

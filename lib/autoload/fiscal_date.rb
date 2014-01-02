@@ -104,7 +104,22 @@ module FiscalDate
   end
 
   class Week
-    def self.in(month)
+    def self.in(*args)
+      case args.size
+      when 2
+        self.in_with_year_and_month(*args)
+      when 1
+        self.in_with_fiscal_month(*args)
+      else
+        raise ArgumentError, "wrong number of arguments (#{args.size} for 1..2)"
+      end
+    end
+
+    def self.in_with_year_and_month(year, month)
+      self.in_with_fiscal_month FiscalDate::Month.new(year, month)
+    end
+
+    def self.in_with_fiscal_month(month)
       week_starts = Option[:week_starts]
 
       month.range.inject([]) do |result, day|

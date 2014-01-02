@@ -275,6 +275,20 @@ describe FiscalDate do
         ])
       end
 
+      context "when passed year/month for arguments" do
+        subject(:weeks) { FiscalDate::Week.in(2013, 5) }
+
+        it "returns weeks" do
+          expect(weeks.map(&:range)).to eq([
+            Date.new(2013,5, 1)..Date.new(2013,5, 4),
+            Date.new(2013,5, 5)..Date.new(2013,5,11),
+            Date.new(2013,5,12)..Date.new(2013,5,18),
+            Date.new(2013,5,19)..Date.new(2013,5,25),
+            Date.new(2013,5,26)..Date.new(2013,5,31),
+          ])
+        end
+      end
+
       context "with month_starts option" do
         include_context "when fiscal month starts 15th"
 

@@ -32,4 +32,36 @@ describe Category do
       expect(subject).to eq 2520
     end
   end
+
+  describe "#variable?" do
+    subject(:category) { build(:category) }
+    subject { category.variable? }
+
+    context "when it is for fixed expenses" do
+      before do
+        category.fixed = true
+      end
+
+      it { should be_false }
+    end
+
+    it { should be_true }
+  end
+
+  describe "#budget" do
+    subject(:category) { build(:category, budget: 100) }
+    subject { category.budget }
+
+    it "returns its budget" do
+      expect(subject).to eq 100
+    end
+
+    # context "when its budget has adjusted for a month" do
+    #   context "when month starts on not 1st day" do
+    #     before { Option[:month_starts] = 15 }
+    #     after  { Option.delete :month_starts }
+
+    #   end
+    # end
+  end
 end
