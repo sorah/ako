@@ -5,7 +5,7 @@ class Report
     def initialize(*args)
       case args.size
       when 3
-        @fiscal_week = FiscalDate::Week.in(*args[0, 2])[args[-1]]
+        @fiscal_week = FiscalDate::Week.in(*args[0, 2])[args[-1].to_i]
       when 1
         unless args.first.kind_of?(FiscalDate::Week)
           raise TypeError, "passed object is not FiscalDate::Week"

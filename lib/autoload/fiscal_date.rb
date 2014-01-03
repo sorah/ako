@@ -48,7 +48,7 @@ module FiscalDate
     end
 
     def initialize(y, m)
-      @year, @month = y, m
+      @year, @month = y.to_i, m.to_i
     end
 
     attr_reader :year, :month
@@ -132,7 +132,7 @@ module FiscalDate
     end
 
     def initialize(fiscal_month, weekno, range)
-      @number = weekno
+      @number = weekno.to_i
       @month = fiscal_month
       @range = range
     end

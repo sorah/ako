@@ -5,7 +5,7 @@ class Report
     def initialize(*args)
       case args.size
       when 3
-        @date = Date.new(*args)
+        @date = Date.new(*args.map(&:to_i))
       when 1
         unless args.first.kind_of?(Date)
           raise TypeError, "passed object is not Date"
