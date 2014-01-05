@@ -21,9 +21,11 @@ ActiveRecord::Base.transaction do
     next if tr.inner_html == "<td colspan=\"8\"></td>\n"
     next if tr.at('th')
     next if tr.at('td.category').text == "\n■\n振替\n"
+    next if /receipt-item/ === tr['class']
     next unless tr.at('td.place a')
     url = tr.at('td.date a')['data-url']
     next if proceeded[url]
+
     d = {
       date: tr.at('td.date a')['data-value'],
       category: tr.at('td.category img')['alt'],
@@ -33,8 +35,11 @@ ActiveRecord::Base.transaction do
       account: (tr.at('td.account-s img') || {'alt' => nil})['alt'],
       comment: tr.at('td.comment').text
     }
+
     d[:place] = nil if /muted/ === tr.at('td.place a')['class']
     d[:comment] = nil if /muted/ === tr.at('td.comment a')['class']
+    # Receipt's date doesn't have proper attribute value
+    d[:date] = tr.parent.at("tr[data-receipt-id='#{tr['data-receipt-id']}'] + tr.receipt-item td.date a")['data-value'] if tr['class'] == "receipt"
 
     category = (categories[d[:category]] ||= Category.where(name: d[:category]).first_or_create)
     sub_categories[category.name] ||= {}
