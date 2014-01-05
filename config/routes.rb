@@ -11,6 +11,14 @@ Nikomaki::Application.routes.draw do
 
   resources :expenses
 
+  get 'report' => 'report#monthly_index', as: :monthly_report_index
+  get 'report/weekly' => 'report#weekly_index', as: :weekly_report_index
+
+  get 'report/:year/:month' => 'report#monthly', as: :monthly_report
+  get 'report/:year/:month/w/:weekno' => 'report#weekly', as: :weekly_report
+  get 'report/:year/:month/:day' => 'report#daily', as: :daily_report
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

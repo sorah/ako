@@ -1,0 +1,15 @@
+%h1 Report: #{@report.year}/#{@report.month}
+
+%section
+  %h2 Budget
+
+  %ul
+    %li Budget: #{@report.budget}
+    %li
+      Spent: #{@report.total_expense}
+      %ul
+        %li Fixed expenses: #{@report.total_fixed_expense}
+        %li Variable expenses: #{@report.total_variable_expense}
+
+%section
+  %h2 Categories
