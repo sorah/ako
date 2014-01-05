@@ -32,6 +32,8 @@ gem 'haml-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', ref: '3'
 
+gem 'nokogiri'
+
 group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
