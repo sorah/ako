@@ -1,6 +1,7 @@
 %h1 Listing expenses
 
 = render 'expenses/list', expenses: @expenses
+= paginate @expenses
 
 %br
 
