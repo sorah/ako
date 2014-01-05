@@ -70,6 +70,10 @@ class Expense < ActiveRecord::Base
     attributes['paid_at'] || self.created_at
   end
 
+  def comment
+    read_attribute(:comment) || ''
+  end
+
   def category(reload=nil)
     @category = nil if reload
     @category ||= Category.joins(:sub_categories) \
