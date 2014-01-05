@@ -13,7 +13,11 @@ module FiscalDate
       if Option[:month_starts] <= date.day
         month = FiscalDate::Month.new(date.year, date.month)
       else
-        month = FiscalDate::Month.new(date.year, date.month - 1)
+        if date.month == 1
+          month = FiscalDate::Month.new(date.year - 1, 12)
+        else
+          month = FiscalDate::Month.new(date.year, date.month - 1)
+        end
       end
 
       week = month.weeks.find { |w| w.range.cover?(date) }

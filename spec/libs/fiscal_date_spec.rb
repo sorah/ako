@@ -82,6 +82,16 @@ describe FiscalDate do
         end
       end
     end
+
+    context "on January and when fiscal month starts 15th" do
+      include_context "when fiscal month starts 15th"
+      let(:date) { Date.new(2013, 1, 5) }
+
+      specify do
+        month = FiscalDate::Month.new(2012, 12)
+        should == [month.weeks[3], month]
+      end
+    end
   end
 
   describe ".today" do
