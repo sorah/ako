@@ -34,6 +34,8 @@ gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', ref: '3'
 
 gem 'nokogiri'
 
+gem 'kaminari'
+
 group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
