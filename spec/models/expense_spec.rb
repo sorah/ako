@@ -136,6 +136,16 @@ describe Expense do
       end
     end
 
+    context "when sub_category has loaded" do
+      let(:expense) { Expense.find(expense_new.id) }
+
+      before { expense.sub_category }
+
+      it "returns category via sub_category" do
+        expect(expense.category).to eq(sub_category.category)
+      end
+    end
+
     describe "reloading" do
       let(:another_sub_category) { create(:sub_category, name: '2') }
 

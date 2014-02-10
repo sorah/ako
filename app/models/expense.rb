@@ -76,8 +76,12 @@ class Expense < ActiveRecord::Base
 
   def category(reload=nil)
     @category = nil if reload
-    @category ||= Category.joins(:sub_categories) \
-                          .where(sub_categories: {id: self.sub_category_id}).first
+    if association(:sub_category).loaded? 
+      @category ||= sub_category.category
+    else
+      @category ||= Category.joins(:sub_categories) \
+                            .where(sub_categories: {id: self.sub_category_id}).first
+    end
   end
 
   def category_id
