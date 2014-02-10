@@ -3,13 +3,62 @@
 %section
   %h2 Budget
 
-  %ul
-    %li Budget: #{@report.budget}
-    %li
-      Spent: #{@report.total_expense}
-      %ul
-        %li Fixed expenses: #{@report.total_fixed_expense}
-        %li Variable expenses: #{@report.total_variable_expense}
+  .row
+    .col-md-3
+      Budget:
+    .col-md-1
+    .col-md-3
+      Spent:
+    .col-md-1
+    .col-md-3
+      Remaining:
+
+  .row
+    .col-md-3
+      #{@report.budget}
+    .col-md-1 -
+    .col-md-3
+      #{@report.total_expense}
+    .col-md-1 =
+    .col-md-3
+      #{@report.remaining_budget}
+
+  .row
+    .col-md-3
+    .col-md-1
+    .col-md-3
+      Fixed: #{@report.total_fixed_expense}
+      %br
+      Variable: #{@report.total_variable_expense}
+
+    .col-md-1
+    .col-md-3
 
 %section
-  %h2 Categories
+  %h2 Summary by week
+
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th{colspan: 2} &nbsp;
+        - @report.weeks.each do |week|
+          %th Week ##{week.number}
+        %th Total
+    %tbody
+      - @report.categories.each do |category_id, creport|
+        - first = true
+        - creport[:sub_categories].each do |sub_category_id, screport|
+          %tr
+            - if first
+              - first = false
+              %th{rowspan: creport[:sub_categories].size}= creport[:category].name
+            %td= screport[:sub_category].name
+            - @report.weeks.each do |weekly_report|
+              - weekly_creport = weekly_report.categories[category_id]
+              - if weekly_creport
+                - weekly_screport = weekly_creport[:sub_categories][sub_category_id]
+                %td= weekly_screport ? weekly_screport[:amount] : 0
+              - else
+                %td 0
+            %td= screport[:amount]
+
