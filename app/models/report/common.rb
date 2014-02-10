@@ -12,8 +12,9 @@ class Report
       expenses.variable.pluck(:amount).inject(:+) || 0
     end
 
-    def categories
-      Hash[expenses.group_by { |_| _.category }.map { |category, es|
+    def categories(reload = false)
+      @_categories = nil if reload
+      @_categories ||= Hash[expenses.group_by { |_| _.category }.map { |category, es|
         [category.id, {
           category: category,
           amount: es.map(&:amount).inject(:+),
