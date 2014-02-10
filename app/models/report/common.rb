@@ -14,7 +14,10 @@ class Report
 
     def categories(reload = false)
       @_categories = nil if reload
-      @_categories ||= Hash[expenses.group_by { |_| _.category }.map { |category, es|
+      return @_categories if @_categories
+
+      expenses = self.expenses.includes(:sub_category => :category)
+      @_categories = Hash[expenses.group_by { |_| _.category }.map { |category, es|
         [category.id, {
           category: category,
           amount: es.map(&:amount).inject(:+),

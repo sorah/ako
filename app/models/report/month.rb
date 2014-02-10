@@ -31,7 +31,7 @@ class Report
     end
 
     def expenses
-      Expense.in(@fiscal_month).includes(:sub_category => :category)
+      Expense.in(@fiscal_month)
     end
 
     def weeks
