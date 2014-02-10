@@ -26,6 +26,10 @@ class Report
       Category.total_budget(year, month)
     end
 
+    def remaining_budget
+      Category.total_budget(year, month) - total_expense
+    end
+
     def expenses
       Expense.in(@fiscal_month).includes(:sub_category => :category)
     end
