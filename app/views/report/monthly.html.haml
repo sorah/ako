@@ -37,7 +37,7 @@
 %section
   %h2 Summary by week
 
-  %table.table.table-bordered
+  %table.table.table-bordered.summary_by_week
     %thead
       %tr
         %th{colspan: 2} &nbsp;
@@ -51,7 +51,7 @@
           %tr
             - if first
               - first = false
-              %th{rowspan: creport[:sub_categories].size}= creport[:category].name
+              %th{rowspan: creport[:sub_categories].size.succ}= creport[:category].name
             %td= screport[:sub_category].name
             - @report.weeks.each do |weekly_report|
               - weekly_creport = weekly_report.categories[category_id]
@@ -61,4 +61,12 @@
               - else
                 %td 0
             %td= screport[:amount]
-
+        %tr.subtotal
+          %th Subtotal
+          - @report.weeks.each do |weekly_report|
+            - weekly_creport = weekly_report.categories[category_id]
+            - if weekly_creport
+              %td= weekly_creport[:amount]
+            - else
+              %td 0
+          %td.subtotal= creport[:amount]
