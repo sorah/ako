@@ -34,12 +34,16 @@ class Report
       Expense.in(@fiscal_month)
     end
 
-    def weeks
-      @fiscal_month.weeks.map { |fw| Report::Week.new(fw) }
+    def weeks(reload = false)
+      @weeks = nil if reload
+      @weeks ||= @fiscal_month.weeks.map do |fw|
+        Report::Week.new(fw)
+      end
     end
 
-    def days
-      @fiscal_month.days.map { |fd| Report::Day.new(fd) }
+    def days(reload = false)
+      @days = nil if reload
+      @weeks ||= @fiscal_month.days.map { |fd| Report::Day.new(fd) }
     end
   end
 end
