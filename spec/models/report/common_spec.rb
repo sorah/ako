@@ -51,8 +51,24 @@ describe Report::Common, :clean_db do
     it { should eq category_variable.expenses.pluck(:amount).inject(:+) }
   end
 
+  describe "#expenses_include_categories" do
+    subject { testee.expenses_include_categories }
+
+    it { should eq Expense.all.includes(sub_category: :category) }
+
+    it "memoizes" do
+      expect(subject.object_id).to eq \
+        testee.expenses_include_categories.object_id
+      expect(subject.object_id).not_to eq \
+        testee.expenses_include_categories(:reload).object_id
+
+    end
+  end
+
   describe "#categories" do
     subject { testee.categories }
+
+    it { should eq Report::Common::CategoriesReport.new(testee) }
 
     specify {
       category_variable_sum = category_variable.expenses.pluck(:amount).inject(:+)

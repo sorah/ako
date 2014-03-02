@@ -12,11 +12,17 @@ class Report
       expenses.variable.pluck(:amount).inject(:+) || 0
     end
 
+    def expenses_include_categories(reload = false)
+      @_expenses_include_categories = nil if reload
+      @_expenses_include_categories ||= \
+        self.expenses.includes(:sub_category => :category)
+    end
+
     def categories(reload = false)
       @_categories = nil if reload
+      @_categories = CategoriesReport.new(self)
       return @_categories if @_categories
 
-      expenses = self.expenses.includes(:sub_category => :category)
       @_categories = Hash[expenses.group_by { |_| _.category }.map { |category, es|
         [category.id, {
           category: category,
