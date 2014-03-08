@@ -44,7 +44,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    database_cleaner (1.1.1)
+    database_rewinder (0.0.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -164,7 +164,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass!
   coffee-rails (~> 4.0.0)
-  database_cleaner
+  database_rewinder
   factory_girl_rails (~> 4.0)
   font-awesome-rails
   haml-rails

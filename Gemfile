@@ -40,7 +40,7 @@ group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
 
-  gem 'database_cleaner'
+  gem 'database_rewinder'
   gem 'factory_girl_rails', '~> 4.0'
 
   gem 'quiet_assets'

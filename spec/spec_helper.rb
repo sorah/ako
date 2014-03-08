@@ -4,21 +4,20 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
-require 'database_cleaner'
-DatabaseCleaner.strategy = :transaction
+require 'database_rewinder'
 
 require 'factory_girl'
 # FactoryGirl.find_definitions
 
-module DatabaseCleanerEnabler
+module DatabaseRewinderEnabler
   def self.included(klass)
     klass.instance_eval do
       before(:each) do
-        DatabaseCleaner.start
+        DatabaseRewinder.start
       end
 
       after(:each) do
-        DatabaseCleaner.clean
+        DatabaseRewinder.clean
       end
     end
   end
@@ -76,7 +75,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include DatabaseCleanerEnabler, clean_db: true
+  config.include DatabaseRewinderEnabler, clean_db: true
   config.include ARLogEnabler, ar_log: true
   config.include FactoryGirl::Syntax::Methods
 
