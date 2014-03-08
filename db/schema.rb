@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308221530) do
+ActiveRecord::Schema.define(version: 20140308222850) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20140308221530) do
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "payment_id"
+    t.integer  "expense_id"
     t.integer  "place_id"
   end
 

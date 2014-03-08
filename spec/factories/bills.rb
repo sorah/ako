@@ -8,6 +8,6 @@ FactoryGirl.define do
     meta "MyText"
     place_id ""
     account_id ""
-    payment_id ""
+    expense_id ""
   end
 end
