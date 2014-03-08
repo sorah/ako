@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Amount:
+  = @bill.amount
+p
+  strong Title:
+  = @bill.title
+p
+  strong Billed at:
+  = @bill.billed_at
+p
+  strong Meta:
+  = @bill.meta
+p
+  strong Place:
+  = @bill.place_id
+p
+  strong Account:
+  = @bill.account_id
+p
+  strong Payment:
+  = @bill.payment_id
+
+= link_to 'Edit', edit_bill_path(@bill)
+'|
+= link_to 'Back', bills_path

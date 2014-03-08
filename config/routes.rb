@@ -1,4 +1,6 @@
 Ako::Application.routes.draw do
+  resources :bills
+
   resources :places do
     collection do
       get :candidates_for_expense
