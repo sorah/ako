@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308220304) do
+ActiveRecord::Schema.define(version: 20140308221121) do
 
   create_table "accounts", force: true do |t|
     t.string   "name"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20140308220304) do
     t.integer  "amount"
     t.string   "title",      default: ""
     t.text     "meta"
-    t.datetime "paid_at"
+    t.datetime "billed_at"
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
