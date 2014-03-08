@@ -68,6 +68,9 @@ describe Option, :clean_db do
   end
 
   after do
-    Rails.cache.clear
+    begin
+      Rails.cache.clear
+    rescue Errno::ENOENT
+    end
   end
 end
