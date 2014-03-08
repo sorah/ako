@@ -1,4 +1,4 @@
-tr.sub_category_form data: {category_id: f.object.category_id, sub_category_id: f.object.id} 
+tr.sub_category_form data-category_id=f.object.category_id data-sub_category_id=f.object.id
   td= f.text_field :name, class: 'form-control', placeholder: 'Name'
   td.checkbox-label-only
     = f.check_box :_destroy
