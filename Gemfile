@@ -29,7 +29,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'puma'
-gem 'haml-rails'
+gem 'slim-rails'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', ref: '3'
 

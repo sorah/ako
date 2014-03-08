@@ -1,17 +1,14 @@
-%h1 Report: #{@report.year}/#{@report.month}
+h1 Report: #{@report.year}/#{@report.month}
 
-%section
-  %h2 Budget
+section
+  h2 Budget
 
   .row
-    .col-md-3
-      Budget:
+    .col-md-3 Budget:
     .col-md-1
-    .col-md-3
-      Spent:
+    .col-md-3 Spent:
     .col-md-1
-    .col-md-3
-      Remaining:
+    .col-md-3 Remaining:
 
   .row
     .col-md-3
@@ -27,46 +24,46 @@
     .col-md-3
     .col-md-1
     .col-md-3
-      Fixed: #{@report.total_fixed_expense}
-      %br
-      Variable: #{@report.total_variable_expense}
+      | Fixed: #{@report.total_fixed_expense}
+      br
+      | Variable: #{@report.total_variable_expense}
 
     .col-md-1
     .col-md-3
 
-%section
-  %h2 Summary by week
+section
+  h2 Summary by week
 
-  %table.table.table-bordered.summary_by_week
-    %thead
-      %tr
-        %th{colspan: 2} &nbsp;
+  table.table.table-bordered.summary_by_week
+    thead
+      tr
+        th colspan=2  &nbsp;
         - @report.weeks.each do |week|
-          %th Week ##{week.number}
-        %th Total
+          th Week #{week.number}
+        th Total
 
-    %tbody
+    tbody
       - @report.categories.each do |category_id, creport|
         - first = true
         - creport[:sub_categories].each do |sub_category_id, screport|
-          %tr
+          tr
             - if first
               - first = false
-              %th{rowspan: creport[:sub_categories].size.succ}= creport[:category].name
+              th rowspan=creport[:sub_categories].size.succ = creport[:category].name
 
-            %td= screport[:sub_category].name
+            td= screport[:sub_category].name
             - @report.weeks.each do |weekly_report|
               - weekly_creport = weekly_report.categories[category_id]
               - if weekly_creport
                 - weekly_screport = weekly_creport[:sub_categories][sub_category_id]
-                %td= weekly_screport ? weekly_screport[:amount] : 0
+                td= weekly_screport ? weekly_screport[:amount] : 0
               - else
-                %td 0
-            %td= screport[:amount]
+                td 0
+            td= screport[:amount]
 
-        %tr.subtotal
-          %th Subtotal
+        tr.subtotal
+          th Subtotal
           - @report.weeks.each do |weekly_report|
             - weekly_creport = weekly_report.categories[category_id]
-            %td= weekly_creport ? weekly_creport[:amount] : 0
-          %td.subtotal= creport[:amount]
+            td= weekly_creport ? weekly_creport[:amount] : 0
+          td.subtotal= creport[:amount]

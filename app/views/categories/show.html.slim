@@ -1,24 +1,24 @@
 - content_for(:page_title) { "#{@category.name} - Category" }
 
-%h1 Category: #{@category.name}
+h1 Category: #{@category.name}
 
 - if @category.fixed
-  %p Fixed
+  p Fixed
 
-%p
-  %b Budget:
+p
+  b Budget:
   = @category.budget
 
-%h3 Sub categories
+h3 Sub categories
 
-%ul
+ul
   - @category.sub_categories.each do |sub_category|
-    %li= sub_category.name
+    li= sub_category.name
 
-= link_to 'Edit', edit_category_path(@category)
-\|
+=> link_to 'Edit', edit_category_path(@category)
+' |
 = link_to 'Back', categories_path
 
-%h2 Expenses
+h2 Expenses
 
 = render 'expenses/list', expenses: @expenses

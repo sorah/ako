@@ -1,0 +1,22 @@
+h1 Listing places
+
+table.table.table-hover
+  colgroup
+    col style='width: 90%;' span=1 
+    col style='width: 10%;' span=1 
+
+  thead
+    tr
+      th Name
+      th
+
+  tbody
+    - @places.each do |place|
+      tr
+        td= link_to place.name, place
+        td
+          = link_to 'Edit', edit_place_path(place)
+          = link_to 'Destroy', place, :method => :delete, :data => { :confirm => 'Are you sure?' }
+br
+
+= link_to 'New Place', new_place_path

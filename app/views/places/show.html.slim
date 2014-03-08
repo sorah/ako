@@ -1,20 +1,20 @@
-%p
-  %b Name:
+p
+  b Name:
   = @place.name
-%p
-  %b Foursquare venue:
+p
+  b Foursquare venue:
   = @place.foursquare_venue_id
-%p
-  %b Latitude:
+p
+  b Latitude:
   = @place.latitude
-%p
-  %b Longitude:
+p
+  b Longitude:
   = @place.longitude
 
 = link_to 'Edit', edit_place_path(@place)
-\|
+| \|
 = link_to 'Back', places_path
 
-%h3 Expenses
+h3 Expenses
 
 = render 'expenses/list', expenses: @expenses

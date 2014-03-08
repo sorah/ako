@@ -1,16 +1,16 @@
-%h1 Listing accounts
+h1 Listing accounts
 
-%table.account_list.table.table-striped
-  %tbody
+table.account_list.table.table-striped
+  tbody
     - @accounts.each do |account|
-      %tr.account{data: {id: account.id}}
-        %td
-          %i{class: "icon-#{account.icon}"}
+      tr.account data-id=account.id
+        td
+          i> class="icon-#{account.icon}" 
           = link_to account.name, account, class: 'name'
-        %td
+        td
           = link_to 'Edit', edit_account_path(account), class: 'btn btn-xs'
           = link_to 'Destroy', account, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-xs btn-danger'
 
-%br
+br
 
 = link_to 'New Account', new_account_path
