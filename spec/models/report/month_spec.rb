@@ -49,7 +49,7 @@ describe Report::Month, :clean_db do
     subject { report.expenses }
 
     it "returns all expenses in the month" do
-      expect(subject).to eq Expense.where(paid_at: (Time.new(2013,10,1, 0,0,0) ... Time.new(2013,11,1, 0,0,0)))
+      expect(subject.to_sql).to eq Expense.where(paid_at: (Time.new(2013,10,1, 0,0,0) ... Time.new(2013,11,1, 0,0,0))).to_sql
     end
 
     context "when month starts on not 1st day" do
