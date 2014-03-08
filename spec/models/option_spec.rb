@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Option do
+describe Option, :clean_db do
   describe "#key" do
     subject { Option.new(tag: 'foo').key }
 
@@ -69,6 +69,5 @@ describe Option do
 
   after do
     Rails.cache.clear
-    Option.destroy_all
   end
 end
