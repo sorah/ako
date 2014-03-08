@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20131204111738) do
 
   create_table "expenses", force: true do |t|
     t.integer  "amount"
-    t.text     "comment",         default: ""
+    t.text     "comment"
     t.text     "meta"
     t.datetime "paid_at"
     t.integer  "place_id"

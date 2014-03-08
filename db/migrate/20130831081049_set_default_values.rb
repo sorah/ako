@@ -6,7 +6,6 @@ class SetDefaultValues < ActiveRecord::Migration
     change_column_default :categories, :budget, 0
     change_column_default :categories, :fixed, false
 
-    change_column_default :payments, :comment, ''
     change_column_default :payments, :fixed, false
 
     change_column_default :sub_categories, :order, 0
