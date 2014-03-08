@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Nikomaki::Application.load_tasks
+Ako::Application.load_tasks

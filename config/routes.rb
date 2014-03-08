@@ -1,4 +1,4 @@
-Nikomaki::Application.routes.draw do
+Ako::Application.routes.draw do
   resources :places do
     collection do
       get :candidates_for_expense
