@@ -4,7 +4,7 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.order('paid_at DESC').page(params[:page])
+    @expenses = Expense.includes(:place, :account, sub_category: :category).order('paid_at DESC').page(params[:page])
   end
 
   # GET /expenses/1
