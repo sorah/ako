@@ -1,0 +1,15 @@
+language: ruby
+cache: bundler
+rvm:
+- "2.1.0"
+matrix:
+  allow_failures:
+    - rvm:
+      - "2.0.0"
+      - "ruby-head"
+  fast_finish: true
+notifications:
+  email:
+    - travis-ci@sorah.jp
+before_script: bundle exec rake db:migrate RAILS_ENV=test || bundle exec rake db:create db:migrate RAILS_ENV=test
+script: bundle exec rake spec
