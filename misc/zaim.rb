@@ -31,9 +31,9 @@ ActiveRecord::Base.transaction do
       category: tr.at('td.category img')['alt'],
       sub_category: tr.at('td.category').text.lines[2].chomp,
       price: tr.at('td.price').text.gsub(/[^\d]/,''),
-      place: tr.at('td.place').text.gsub(/　/, ' ').gsub(/^\s+/,'').gsub(/\s+$/,''),
+      place: tr.at('td.place a') && tr.at('td.place a')['data-value'].gsub(/　/, ' ').gsub(/^\s+/,'').gsub(/\s+$/,''),
       account: (tr.at('td.account-s img') || {'alt' => nil})['alt'],
-      comment: tr.at('td.comment').text
+      comment: tr.at('td.comment a')['data-value']
     }
 
     d[:place] = nil if /muted/ === tr.at('td.place a')['class']
