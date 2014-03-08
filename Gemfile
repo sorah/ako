@@ -36,6 +36,8 @@ gem 'nokogiri'
 
 gem 'kaminari'
 
+gem 'sigdump', :require => 'sigdump/setup'
+
 group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
@@ -46,6 +48,7 @@ group :test, :development do
   gem 'quiet_assets'
 
   gem 'pry'
+
 end
 
 group :doc do
