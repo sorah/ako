@@ -1,7 +1,7 @@
 require 'nokogiri'
 
 # prepare html on https://zaim.net/money / own your risk
-# setInterval(function() { if(!$('#readmore button').hasClass('disabled')) $('#readmore').click() }, 5000);
+# setInterval(function() { if(!$('button.btn-readmore').hasClass('disabled')) $('button.btn-readmore').click() }, 5000);
 # copy table.table03 as HTML using Web Inspector
 
 html = Nokogiri::HTML(open('/Users/sorah/Documents/zaim.html'),nil,'UTF-8')
