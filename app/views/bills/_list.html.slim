@@ -1,0 +1,53 @@
+- bills ||= []
+
+section.bills
+  - grouped_bills = bills.group_by {|_| FiscalDate.locate_week(_.billed_at) }
+  - grouped_bills.each do |week, bills|
+    section.expenses-week.panel.panel-default
+      .panel-heading
+        .panel-title= week.to_s
+
+      .panel-body
+        .expenses-sub-head.row
+          .col-md-2 style="text-align: right;" Billed At
+          .col-md-1 Account
+          .col-md-1 Amount
+          .col-md-3 Title
+          .col-md-2 Place
+          .col-md-1 Expense
+
+        - bills.each do |bill|
+          section.expenses-sub.row data-id=bill.id
+            time.billed-at datetime=bill.billed_at.xmlschema
+            .col-md-2 style='text-align: right;' 
+              time.billed-at datetime=bill.billed_at.xmlschema = l bill.billed_at, format: :short
+
+            .col-md-1
+              -if bill.account
+                .account data-id=bill.account_id
+                  i> class=bill.account.icon_class 
+                  = bill.account.name
+
+            .col-md-1
+              .amount= bill.amount
+
+            .col-md-3
+              .title= bill.title
+
+            .col-md-2
+              - if bill.place
+                td.place data-id=bill.place_id = bill.place.name
+
+            .col-md-1
+              - if bill.expense
+                td.expense data-id=bill.expense_id = link_to(bill.expense_id, expense_path(bill.expense))
+              - else
+                span.label.label-warning Unlinked
+
+            .col-md-1
+              .actions
+                = link_to edit_bill_path(bill), title: 'Edit' do
+                  i.icon-pencil.icon-large
+                = link_to bill, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
+                  i.icon-remove.icon-large
+

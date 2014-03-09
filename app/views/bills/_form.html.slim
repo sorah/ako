@@ -1,30 +1,39 @@
-= form_for @bill do |f|
+= form_for @bill, html: {class: 'bill_form form-horizontal', data: {id: @bill.id}} do |f|
   - if @bill.errors.any?
     #error_explanation
-      h2 = "#{pluralize(@bill.errors.count, "error")} prohibited this bill from being saved:"
+      h2 #{pluralize(@bill.errors.count, "error")} prohibited this bill from being saved:
       ul
         - @bill.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.label :amount
-    = f.number_field :amount
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :billed_at
-    = f.datetime_select :billed_at
-  .field
-    = f.label :meta
-    = f.text_area :meta
-  .field
-    = f.label :place_id
-    = f.text_field :place_id
-  .field
-    = f.label :account_id
-    = f.text_field :account_id
-  .field
-    = f.label :expense_id
-    = f.text_field :expense_id
-  .actions = f.submit 'Save'
+  .form.group
+    = f.label :amount, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.number_field :amount, class: 'form-control input-lg'
+  .form.group
+    = f.label :billed_at, class: 'col-md-2 control-label'
+    .col-md-10.datetime-select
+      = f.datetime_select :billed_at, {}, class: 'form-control'
+  .form.group
+    = f.label :place_id, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_field :place_id, class: 'form-control'
+
+  .form.group
+    = f.label :title, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_field :title, class: 'form-control'
+  .form.group
+    = f.label :meta, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_area :meta, class: 'form-control'
+  .form.group
+    = f.label :expense_id, class: 'col-md-2 control-label'
+    .col-md-10
+      = f.text_field :expense_id, class: 'form-control'
+  .form.group
+    = f.label :account_id, class: 'col-md-2 control-label'
+    .col-md-10.btnish-radio
+      = f.collection_radio_buttons :account_id, Account.all, :id, ->(_) { "<i class=\"icon-#{_.icon}\"></i> ".html_safe + _.name }
+
+  .actions = f.submit 'Save', class: 'btn btn-default'
