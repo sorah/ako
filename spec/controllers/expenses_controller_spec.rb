@@ -7,15 +7,11 @@ describe ExpensesController, clean_db: true do
     }
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ExpensesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
   let!(:expense) { create(:expense) }
 
   describe "GET index" do
     it "assigns all expenses as @expenses" do
-      expense # to create
       get :index, {}, valid_session
       assigns(:expenses).should eq([expense])
     end
@@ -94,10 +90,6 @@ describe ExpensesController, clean_db: true do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested expense" do
-        # Assuming there are no other expenses in the database, this
-        # specifies that the Expense created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
         Expense.any_instance.should_receive(:update).with(valid_attributes)
         put :update, {:id => expense.to_param, :expense => valid_attributes}, valid_session
       end
