@@ -102,12 +102,11 @@ describe BillsController do
     let!(:bill) { Bill.create! valid_attributes }
     describe "with valid params" do
       it "updates the requested bill" do
-        # Assuming there are no other bills in the database, this
-        # specifies that the Bill created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Bill.any_instance.should_receive(:update).with({ "amount" => "1" })
-        put :update, {:id => bill.to_param, :bill => { "amount" => "1" }}, valid_session
+        expect {
+          put :update, {:id => bill.to_param, :bill => { "amount" => "10" }}, valid_session
+        }.to change {
+          bill.reload.amount
+        }.from(1).to(10)
       end
 
       it "assigns the requested bill as @bill" do
