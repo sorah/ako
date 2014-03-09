@@ -7,4 +7,10 @@ class Bill < ActiveRecord::Base
 
   validates_presence_of :billed_at
   validates_presence_of :amount
+
+  before_validation do
+    if self.new_record?
+      self.billed_at ||= Time.now
+    end
+  end
 end
