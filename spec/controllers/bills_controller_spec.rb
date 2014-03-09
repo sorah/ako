@@ -96,6 +96,14 @@ describe BillsController do
         response.should render_template("new")
       end
     end
+
+    context "with meta" do
+      it "creates a new Bill with given JSON" do
+        post :create, {bill: {amount: 100, meta: {test: 'hello'}.to_json}}, valid_session
+
+        expect(Bill.last.meta['test']).to eq 'hello'
+      end
+    end
   end
 
   describe "PUT update" do
@@ -131,6 +139,26 @@ describe BillsController do
         Bill.any_instance.stub(:save).and_return(false)
         put :update, {:id => bill.to_param, :bill => { "amount" => "invalid value" }}, valid_session
         response.should render_template("edit")
+      end
+    end
+
+    context "with meta" do
+      it "creates a new Bill with given JSON" do
+        put :update, {id: bill.to_param, bill: {meta: {test: 'hello'}.to_json}}, valid_session
+
+        expect(bill.reload.meta['test']).to eq 'hello'
+      end
+
+      context "without meta" do
+        before do
+          bill.meta['hello'] = 'hola'
+          bill.save!
+        end
+
+        it "lets meta as is" do
+        put :update, {id: bill.to_param, bill: {amount: 10}}, valid_session
+          expect(bill.reload.meta['hello']).to eq 'hola'
+        end
       end
     end
   end
