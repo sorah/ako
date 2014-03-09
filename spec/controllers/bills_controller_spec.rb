@@ -99,9 +99,9 @@ describe BillsController do
   end
 
   describe "PUT update" do
+    let!(:bill) { Bill.create! valid_attributes }
     describe "with valid params" do
       it "updates the requested bill" do
-        bill = Bill.create! valid_attributes
         # Assuming there are no other bills in the database, this
         # specifies that the Bill created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -111,13 +111,11 @@ describe BillsController do
       end
 
       it "assigns the requested bill as @bill" do
-        bill = Bill.create! valid_attributes
         put :update, {:id => bill.to_param, :bill => valid_attributes}, valid_session
         assigns(:bill).should eq(bill)
       end
 
       it "redirects to the bill" do
-        bill = Bill.create! valid_attributes
         put :update, {:id => bill.to_param, :bill => valid_attributes}, valid_session
         response.should redirect_to(bill)
       end
@@ -125,16 +123,12 @@ describe BillsController do
 
     describe "with invalid params" do
       it "assigns the bill as @bill" do
-        bill = Bill.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
         Bill.any_instance.stub(:save).and_return(false)
         put :update, {:id => bill.to_param, :bill => { "amount" => "invalid value" }}, valid_session
         assigns(:bill).should eq(bill)
       end
 
       it "re-renders the 'edit' template" do
-        bill = Bill.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
         Bill.any_instance.stub(:save).and_return(false)
         put :update, {:id => bill.to_param, :bill => { "amount" => "invalid value" }}, valid_session
         response.should render_template("edit")
