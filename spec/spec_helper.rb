@@ -75,7 +75,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include DatabaseRewinderEnabler, clean_db: true
+  config.include DatabaseRewinderEnabler
   config.include ARLogEnabler, ar_log: true
   config.include FactoryGirl::Syntax::Methods
 
