@@ -29,7 +29,7 @@ class BillsController < ApplicationController
     end
 
     @bill = Bill.new(bill_params)
-    @bill.meta = meta
+    @bill.meta = meta if meta
 
     respond_to do |format|
       if @bill.save
@@ -51,7 +51,7 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       @bill.assign_attributes(bill_params)
-      @bill.meta = meta
+      @bill.meta = meta if meta
       if @bill.save
         format.html { redirect_to @bill, notice: 'Bill was successfully updated.' }
         format.json { head :no_content }
