@@ -4,7 +4,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    @bills = Bill.all
+    @bills = Bill.all.page(params[:page])
   end
 
   # GET /bills/1
@@ -24,7 +24,12 @@ class BillsController < ApplicationController
   # POST /bills
   # POST /bills.json
   def create
+    if bill_params['meta']
+      meta = JSON.parse(bill_params.delete 'meta')
+    end
+
     @bill = Bill.new(bill_params)
+    @bill.meta = meta
 
     respond_to do |format|
       if @bill.save
@@ -40,8 +45,14 @@ class BillsController < ApplicationController
   # PATCH/PUT /bills/1
   # PATCH/PUT /bills/1.json
   def update
+    if bill_params['meta']
+      meta = JSON.parse(bill_params.delete 'meta')
+    end
+
     respond_to do |format|
-      if @bill.update(bill_params)
+      @bill.assign_attributes(bill_params)
+      @bill.meta = meta
+      if @bill.save
         format.html { redirect_to @bill, notice: 'Bill was successfully updated.' }
         format.json { head :no_content }
       else
