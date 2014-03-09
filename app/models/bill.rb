@@ -1,5 +1,7 @@
 class Bill < ActiveRecord::Base
   belongs_to :expense
+  belongs_to :account
+  belongs_to :place
 
   serialize :meta, Hash
 

@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
   has_many :expenses
+  has_many :bills
 
   serialize :meta, Hash
 
