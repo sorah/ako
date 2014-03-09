@@ -6,4 +6,5 @@ class Bill < ActiveRecord::Base
   serialize :meta, Hash
 
   validates_presence_of :billed_at
+  validates_presence_of :amount
 end
