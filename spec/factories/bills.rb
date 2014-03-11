@@ -2,12 +2,13 @@
 
 FactoryGirl.define do
   factory :bill do
-    amount 1
-    title "MyString"
-    billed_at "2014-03-09 07:18:44"
-    meta "MyText"
-    place_id ""
-    account_id ""
-    expense_id ""
+    amount 100
+    title "shop:2014030901"
+    billed_at Time.now
+    meta({"test" => "value"}.to_json)
+
+    # place_id ""
+    # account_id ""
+    # expense_id ""
   end
 end
