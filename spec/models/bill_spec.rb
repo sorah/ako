@@ -18,12 +18,15 @@ describe Bill do
     # all within 1 day,  with 5% accuracy of amount
 
     it "shows expense that paid same amount" do
-      expense_a = create(:expense, amount: 100, paid_at: bill.billed_at)
-      expense_b = create(:expense, amount: 200, paid_at: bill.billed_at)
-      expense_c = create(:expense, amount: 100, paid_at: bill.billed_at + 2.days)
-      expense_d = create(:expense, amount: 100, paid_at: bill.billed_at - 2.days)
+      account = create(:account)
+      bill.account = account
 
-      expect(subject).to eq [expense_a]
+      expense_a = create(:expense, amount: 100, account: account, paid_at: bill.billed_at)
+      expense_b = create(:expense, amount: 200, account: account, paid_at: bill.billed_at)
+      expense_c = create(:expense, amount: 100, account: account, paid_at: bill.billed_at + 2.days)
+      expense_d = create(:expense, amount: 100, account: account, paid_at: bill.billed_at - 2.days)
+
+      expect(subject).to eq [expense_a, expense_c, expense_d]
     end
 
     it "doesn't show expense that paid same account, but not billed on same day" do
@@ -64,19 +67,23 @@ describe Bill do
     it "calculates scores then sort candidates properly" do
       place = create(:place, name: 'a')
       account = create(:account, name: 'a')
+      bill.place = place
+      bill.account = account
 
       expenses = []
-      expenses << create(:expense, amount: 100, place: place, account: account, paid_at: bill.billed_at)
-      expenses << create(:expense, amount: 102, place: place, account: account, paid_at: bill.billed_at)
-      expenses << create(:expense, amount: 100, place: place, account: account, paid_at: bill.billed_at - 1.days)
-      expenses << create(:expense, amount: 100, place: place, paid_at: bill.billed_at)
-      expenses << create(:expense, amount: 102, place: place, paid_at: bill.billed_at)
-      expenses << create(:expense, amount: 100, place: place, paid_at: bill.billed_at - 1.days)
-      expenses << create(:expense, amount: 100, account: account, paid_at: bill.billed_at)
-      expenses << create(:expense, amount: 102, account: account, paid_at: bill.billed_at)
-      expenses << create(:expense, amount: 100, account: account, paid_at: bill.billed_at - 1.days)
-      expenses << create(:expense, amount: 100, paid_at: bill.billed_at)
+      expenses << create(:expense, comment: :a, amount: 100, place: place, account: account, paid_at: bill.billed_at)
+      expenses << create(:expense, comment: :b, amount: 102, place: place, account: account, paid_at: bill.billed_at)
+      expenses << create(:expense, comment: :c, amount: 100, place: place, account: account, paid_at: bill.billed_at - 1.days)
+      expenses << create(:expense, comment: :d, amount: 100, place: place, paid_at: bill.billed_at)
+      expenses << create(:expense, comment: :e, amount: 102, place: place, paid_at: bill.billed_at)
+      expenses << create(:expense, comment: :f, amount: 100, place: place, paid_at: bill.billed_at - 1.days)
+      expenses << create(:expense, comment: :g, amount: 100, account: account, paid_at: bill.billed_at)
+      expenses << create(:expense, comment: :h, amount: 102, account: account, paid_at: bill.billed_at)
+      expenses << create(:expense, comment: :i, amount: 100, account: account, paid_at: bill.billed_at - 1.days)
+      expenses << create(:expense, comment: :j, amount: 100, paid_at: bill.billed_at)
 
+      expect(subject.sort_by(&:id)).to eq expenses.sort_by(&:id)
+      expect(subject.map(&:id)).to eq expenses.map(&:id)
       expect(subject).to eq expenses
     end
   end
