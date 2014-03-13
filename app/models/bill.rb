@@ -46,7 +46,7 @@ class Bill < ActiveRecord::Base
         score -= 50
       end
 
-      p [score, expense]
+      [score, expense]
     end
     expenses.compact!
 
