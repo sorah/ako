@@ -31,8 +31,8 @@ section.expenses
                 - category = expense.category
                 - sub_category = expense.sub_category
                 .category data-category-name=category.name data-category-id=category.id data-sub-category-name=sub_category.name data-sub-category-id=sub_category.id
-                  i class=category.icon_class 
-                  #{category.name} &gt; #{sub_category.name}
+                  i> class=category.icon_class 
+                  | #{sub_category.name}
 
             .col-md-1
               .amount= expense.amount
