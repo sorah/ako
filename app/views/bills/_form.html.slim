@@ -17,7 +17,7 @@
   .form.group
     = f.label :place_id, class: 'col-md-2 control-label'
     .col-md-10
-      = f.text_field :place_id, class: 'form-control'
+      = render 'shared/place_field', obj: @bill, form: f
 
   .form.group
     = f.label :title, class: 'col-md-2 control-label'

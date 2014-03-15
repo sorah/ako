@@ -87,4 +87,8 @@ describe Bill do
       expect(subject).to eq expenses
     end
   end
+
+  it "includes PlaceNameAccessor" do
+    expect(described_class.ancestors).to include(PlaceNameAccessor)
+  end
 end
