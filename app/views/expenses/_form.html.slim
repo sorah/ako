@@ -26,7 +26,7 @@
   .form-group
     = f.label :sub_category_id, class: 'col-md-2 control-label'
     .col-md-10
-      = f.grouped_collection_select :sub_category_id, Category.all, :sub_categories, :name, :id, ->(_) { "#{_.category.name}: #{_.name}" }, {}, class: 'form-control'
+      = f.grouped_collection_select :sub_category_id, Category.includes(sub_categories: :category).all, :sub_categories, :name, :id, ->(_) { "#{_.category.name}: #{_.name}" }, {}, class: 'form-control'
   .form-group
     = f.label :fixed, class: 'col-md-2 control-label'
     .col-md-10
