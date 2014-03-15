@@ -95,6 +95,10 @@ class Expense < ActiveRecord::Base
     super
   end
 
+  def title
+    "#{I18n.l(self.paid_at.to_date, format: :short)} @ #{self.place_name}: #{self.comment}"
+  end
+
   private
 
   def assign_paid_at
