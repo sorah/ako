@@ -11,19 +11,10 @@
     .col-md-10
       = f.number_field :amount, class: 'form-control input-lg'
 
-  .form-group.expense-place-field
+  .form-group
     = f.label :place_name, class: 'col-md-2 control-label'
     .col-md-10
-      .place_id_field.form-control style=(@expense.place ? '' : 'display: none;')
-        - if @expense.place
-          = @expense.place.name
-          = f.hidden_field :place_id
-      .place_name_field style=(@expense.place && 'display: none;')
-        - if @expense.place
-          = f.text_field :place_name, class: 'form-control', value: ''
-        - else
-          = f.text_field :place_name, class: 'form-control'
-        .place_name_candidates
+      = render 'shared/place_field', obj: @expense, form: f
   .form-group
     = f.label :comment, class: 'col-md-2 control-label'
     .col-md-10

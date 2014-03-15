@@ -1,0 +1,11 @@
+.place_field
+  .place_id_field.form-control style=(obj.place ? '' : 'display: none;')
+    - if obj.place
+      = obj.place.name
+      = form.hidden_field :place_id
+  .place_name_field style=(obj.place && 'display: none;')
+    - if @expense.place
+      = form.text_field :place_name, class: 'form-control', value: ''
+    - else
+      = form.text_field :place_name, class: 'form-control'
+    .place_name_candidates
