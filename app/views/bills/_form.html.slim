@@ -6,32 +6,32 @@
         - @bill.errors.full_messages.each do |message|
           li = message
 
-  .form.group
+  .form-group
     = f.label :amount, class: 'col-md-2 control-label'
     .col-md-10
       = f.number_field :amount, class: 'form-control input-lg'
-  .form.group
+  .form-group
     = f.label :billed_at, class: 'col-md-2 control-label'
     .col-md-10.datetime-select
       = f.datetime_select :billed_at, {}, class: 'form-control'
-  .form.group
+  .form-group
     = f.label :place_id, class: 'col-md-2 control-label'
     .col-md-10
       = render 'shared/place_field', obj: @bill, form: f
 
-  .form.group
+  .form-group
     = f.label :title, class: 'col-md-2 control-label'
     .col-md-10
       = f.text_field :title, class: 'form-control'
-  .form.group
+  .form-group
     = f.label :meta, class: 'col-md-2 control-label'
     .col-md-10
       = f.text_area :meta, class: 'form-control'
-  .form.group
+  .form-group
     = f.label :expense_id, class: 'col-md-2 control-label'
     .col-md-10
       = f.text_field :expense_id, class: 'form-control'
-  .form.group
+  .form-group
     = f.label :account_id, class: 'col-md-2 control-label'
     .col-md-10.btnish-radio
       = f.collection_radio_buttons :account_id, Account.all, :id, ->(_) { "<i class=\"icon-#{_.icon}\"></i> ".html_safe + _.name }
