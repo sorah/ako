@@ -11,8 +11,8 @@ section.expenses
         .expenses-sub-head.row
           .col-md-2 style="text-align: right;" Paid At
           .col-md-1 Account
-          .col-md-1 Category
-          .col-md-2 Amount
+          .col-md-2 Category
+          .col-md-1 Amount
           .col-md-2 Place
           .col-md-3 Comment
 
@@ -26,7 +26,7 @@ section.expenses
                   i class=expense.account.icon_class 
                   = expense.account.name
 
-            .col-md-1
+            .col-md-2
               - if expense.category
                 - category = expense.category
                 - sub_category = expense.sub_category
@@ -34,7 +34,7 @@ section.expenses
                   i class=category.icon_class 
                   #{category.name} &gt; #{sub_category.name}
 
-            .col-md-2
+            .col-md-1
               .amount= expense.amount
 
             .col-md-2
