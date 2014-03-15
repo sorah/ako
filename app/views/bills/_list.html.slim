@@ -12,9 +12,9 @@ section.bills
           .col-md-2 style="text-align: right;" Billed At
           .col-md-1 Account
           .col-md-1 Amount
-          .col-md-3 Title
+          .col-md-2 Title
           .col-md-2 Place
-          .col-md-1 Expense
+          .col-md-3 Expense
 
         - bills.each do |bill|
           section.expenses-sub.row data-id=bill.id
@@ -31,14 +31,14 @@ section.bills
             .col-md-1
               .amount= bill.amount
 
-            .col-md-3
+            .col-md-2
               .title= bill.title
 
             .col-md-2
               - if bill.place
                 td.place data-id=bill.place_id = bill.place.name
 
-            .col-md-1
+            .col-md-3
               - if bill.expense
                 td.expense data-id=bill.expense_id = link_to(bill.expense.title, expense_path(bill.expense))
               - else
