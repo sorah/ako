@@ -6,6 +6,7 @@ initializer = ->
     place_fixed_area = self.find('.place_id_field')
 
     place_name_field = place_name_area.find('input')
+    place_id_name = self.data('place-id-name')
 
     show_place_candidates = ->
       name = place_name_field.val()
@@ -20,7 +21,7 @@ initializer = ->
         candidates.find('li').click ->
           id = $(this).data('id')
           place_fixed_area.text($(this).text()).append(
-            $("<input>").attr('name': 'expense[place_id]', 'type': 'hidden', 'value': id)
+            $("<input>").attr('name': place_id_name, 'type': 'hidden', 'value': id)
           ).show()
           place_name_area.hide()
           place_name_field.val('')
