@@ -12,9 +12,16 @@
 .expenses-sub-head {
   margin-top: -10px;
   padding-bottom: 3px;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 
   * {
     font-weight: bold;
   }
+}
+
+.expenses-sub.row {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid $gray-lighter;
+
 }
