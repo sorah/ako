@@ -13,6 +13,8 @@ class Expense < ActiveRecord::Base
 
   before_validation :assign_paid_at
 
+  include PlaceNameAccessor
+
   # default_scope do
   #   joins(:sub_category).select('*,`sub_categories`.`category_id` AS `category_id`')
   # end
@@ -86,18 +88,6 @@ class Expense < ActiveRecord::Base
 
   def category_id
     category.try(:id)
-  end
-
-  def place_name
-    self.place.try(:name)
-  end
-
-  def place_name=(o)
-    if o.present?
-      self.place = Place.find_or_create_by(name: o)
-    end
-
-    o
   end
 
   def reload(*)

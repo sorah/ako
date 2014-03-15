@@ -168,45 +168,8 @@ describe Expense do
     end
   end
 
-  describe "#place_name", clean_db: true do
-    subject(:expense) { build(:expense) }
-
-    context "when specified" do
-      context "and place exists" do
-        it "sets place_id" do
-          place = create(:place)
-
-          expect {
-            expense.place_name = place.name
-          }.to change { expense.place }.to(place)
-        end
-      end
-
-      context "and place doesn't exist" do
-        it "creates place" do
-          expect {
-            expense.place_name = 'somewhere'
-          }.to change { Place.count }.by(1)
-
-          expect(Place.last.name).to eq 'somewhere'
-          expect(expense.place).to eq Place.last
-        end
-      end
-    end
-
-    context "when not specified" do
-      context "and place_id is present" do
-        before do
-          expense.place = create(:place)
-        end
-
-        it "leaves place as is" do
-          expect {
-            expense.place_name = ""
-          }.to_not change { expense.place }
-        end
-      end
-    end
+  it "includes PlaceNameAccessor" do
+    expect(described_class.ancestors).to include(PlaceNameAccessor)
   end
 
   describe "#fixed?", :clean_db do
