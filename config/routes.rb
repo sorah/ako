@@ -3,7 +3,7 @@ Ako::Application.routes.draw do
 
   resources :places do
     collection do
-      get :candidates_for_expense
+      post :candidates_for_expense
     end
   end
 

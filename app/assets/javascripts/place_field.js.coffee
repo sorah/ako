@@ -16,7 +16,7 @@ initializer = ->
         candidates.hide()
         return
 
-      $.get '/places/candidates_for_expense', {name: name}, (html) ->
+      $.post '/places/candidates_for_expense', {name: name}, (html) ->
         candidates.html html
         candidates.find('li').click ->
           id = $(this).data('id')

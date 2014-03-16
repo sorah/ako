@@ -126,6 +126,10 @@ describe PlacesController do
   end
 
   describe "GET candidates_for_expense" do
+    before do
+      request.env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+    end
+
     it "renders candidates for expense" do
       a = create(:place, name: 'aab')
       b = create(:place, name: 'abb')
@@ -135,6 +139,12 @@ describe PlacesController do
 
       expect(assigns(:places)).to eq [b,c]
       expect(response).to render_template("candidates_for_expense")
+    end
+
+    it "rejects not XHR" do
+      request.env.delete 'HTTP_X_REQUESTED_WITH'
+      post :candidates_for_expense, {name: 'ab'}, valid_session
+      expect(response.code).to eq '400'
     end
   end
 end
