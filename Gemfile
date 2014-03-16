@@ -39,6 +39,8 @@ gem 'kaminari'
 
 gem 'sigdump', :require => 'sigdump/setup'
 
+gem 'http_status_exceptions'
+
 group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
@@ -68,3 +70,4 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+

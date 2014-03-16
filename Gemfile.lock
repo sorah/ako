@@ -57,6 +57,9 @@ GEM
     font-awesome-rails (3.2.1.2)
       railties (>= 3.2, < 5.0)
     hike (1.2.3)
+    http_status_exceptions (0.3.0)
+      actionpack (>= 3)
+      rack (>= 1.2.1)
     i18n (0.6.4)
     jbuilder (1.5.0)
       activesupport (>= 3.0.0)
@@ -171,6 +174,7 @@ DEPENDENCIES
   database_rewinder
   factory_girl_rails (~> 4.0)
   font-awesome-rails
+  http_status_exceptions
   jbuilder (~> 1.2)
   jquery-rails
   kaminari
