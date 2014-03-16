@@ -30,7 +30,12 @@
   .form-group
     = f.label :expense_id, class: 'col-md-2 control-label'
     .col-md-10
-      = f.text_field :expense_id, class: 'form-control'
+      .expense_field
+        .expense_id_field style=(@bill.expense && 'display: none;')
+          = f.text_field :expense_id, class: 'form-control'
+        .expense_title_field.form-control style=(@bill.expense ? '' : 'display: none;')
+          - if @bill.expense
+            = @bill.expense.title
   .form-group
     = f.label :account_id, class: 'col-md-2 control-label'
     .col-md-10.btnish-radio
