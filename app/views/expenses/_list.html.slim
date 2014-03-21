@@ -46,9 +46,9 @@ section.expenses
 
             .col-md-1
               .actions
-                = link_to expense_path(expense), title: 'Show' do
+                => link_to expense_path(expense), title: 'Show' do
                   i.icon-info-sign.icon-large
-                = link_to edit_expense_path(expense), title: 'Edit' do
+                => link_to edit_expense_path(expense), title: 'Edit' do
                   i.icon-pencil.icon-large
                 = link_to expense, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
                   i.icon-remove.icon-large
