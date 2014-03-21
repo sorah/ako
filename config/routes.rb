@@ -1,4 +1,6 @@
 Ako::Application.routes.draw do
+  root 'dashboard#index'
+
   resources :bills
 
   resources :places do

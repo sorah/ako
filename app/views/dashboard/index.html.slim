@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-body
+    | You can spend #{@monthly_report.remaining_budget} this month!
+
+.panel.panel-default
+  .panel-heading
+    | Add expense
+  .panel-body
+    = render 'expenses/form'
