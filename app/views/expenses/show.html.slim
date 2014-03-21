@@ -1,25 +1,59 @@
-- if @expense.fixed
-  p Fixed
-p
-  b Place:
-  = @expense.place.name
-p
-  b Amount:
-  = @expense.amount
-p
-  b Comment:
-  = @expense.comment
-p
-  b Paid at:
-  = @expense.paid_at
-p
-  b Category:
-  #{@expense.category.name} - #{@expense.sub_category.name}
-p
-  b Account:
-  - if @expense.account
-    = @expense.account.name
+.expense
+  h1.page-header= @expense.title
 
-= link_to 'Edit', edit_expense_path(@expense)
-| \|
-= link_to 'Back', expenses_path
+  - if @expense.fixed
+    span.label.label-default Fixed
+
+  .actions
+    p
+      => link_to edit_expense_path(@expense), title: 'Edit', class: 'btn btn-delete' do
+        i.icon-pencil>
+        | Edit
+      = link_to @expense, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Delete', class: 'btn btn-danger' do
+        i.icon-remove>
+        | Delete
+
+  .attributes
+    .row
+      .name.col-md-1
+        | Amount:
+      .value.col-md-11
+        = @expense.amount
+    .row
+      .name.col-md-1
+        | Place:
+      .value.col-md-11
+        - if @expense.place
+          = link_to @expense.place.name, @expense.place
+    .row
+      .name.col-md-1
+        | Comment:
+      .value.col-md-11
+        = @expense.comment
+    .row
+      .name.col-md-1
+        | Paid at:
+      .value.col-md-11
+        = @expense.paid_at
+    .row
+      .name.col-md-1
+        | Category:
+      .value.col-md-11
+        - if @expense.sub_category
+          = link_to @expense.category do
+            i> class=@expense.category.icon_class
+            | #{@expense.category.name} - #{@expense.sub_category.name}
+    .row
+      .name.col-md-1
+        | Account:
+      .value.col-md-11
+        - if @expense.account
+          = link_to @expense.account do
+            i> class=@expense.account.icon_class
+            = @expense.account.name
+
+  section.bills
+    h2 Related bills
+
+    - @expense.bills.each do |bill|
+      = render 'bills/card', bill: bill

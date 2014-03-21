@@ -1,0 +1,23 @@
+.panel.panel-default.bill.bill-card
+  - if bill.title.present?
+    .panel-heading= bill.title
+  .panel-body
+    .attributes
+      .row
+        .name.col-md-1
+          | Billed at:
+        .value.col-md-11
+          = bill.billed_at
+      .row
+        .name.col-md-1
+          | Amount:
+        .value.col-md-11
+          = bill.amount
+      .row
+        .name.col-md-1
+          | Account:
+        .value.col-md-11
+          - if bill.account
+            = link_to bill.account do
+              i> class=bill.account.icon_class
+              = bill.account.name
