@@ -64,6 +64,7 @@ class PlacesController < ApplicationController
 
   def candidates_for_expense
     raise HTTPStatus::BadRequest, "you're not via XHR" unless request.xhr?
+    # XXX: Move the logic to model
     @places = Place.where('name like ?', params[:name].gsub(/[%_]/,'\\\\\0') +'%')
 
     render :candidates_for_expense, layout: false
