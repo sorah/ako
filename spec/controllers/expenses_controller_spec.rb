@@ -135,4 +135,52 @@ describe ExpensesController, clean_db: true do
     end
   end
 
+  describe "#candidates_for_bill" do
+    before do
+      request.env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+    end
+
+    let(:bill) { create(:bill) }
+
+    context "when request is not via XHR" do
+      before do
+        request.env.delete 'HTTP_X_REQUESTED_WITH'
+      end
+
+      it "rejects" do
+        post :candidates_for_bill, {}, valid_session
+        expect(response.code).to eq '400'
+      end
+    end
+
+    context "with bill_id" do
+      context "when bill exists" do
+        before do
+          create(:expense, amount: 100, paid_at: bill.billed_at)
+        end
+
+        it "assigns bill.expense_candidates" do
+          post :candidates_for_bill, {bill_id: bill.id}, valid_session
+          expect(assigns(:expenses)).to eq bill.expense_candidates
+        end
+      end
+
+      context "when bill not exists" do
+        it "returns 404" do
+          id = bill.id
+          bill.destroy!
+
+          expect {
+            post :candidates_for_bill, {bill_id: id}, valid_session
+          }.to raise_error(ActiveRecord::RecordNotFound)
+        end
+      end
+    end
+
+    it "renders without layout"
+
+    context "with bill" do
+      it "creates temporalily bill"
+    end
+  end
 end

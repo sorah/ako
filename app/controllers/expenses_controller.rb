@@ -61,6 +61,14 @@ class ExpensesController < ApplicationController
     end
   end
 
+  def candidates_for_bill
+    raise HTTPStatus::BadRequest, "you're not via XHR" unless request.xhr?
+
+    bill = Bill.find(params[:bill_id])
+    @expenses = bill.expense_candidates
+    render layout: nil
+  end
+
   private
 
     # Use callbacks to share common setup or constraints between actions.

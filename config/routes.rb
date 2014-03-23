@@ -13,7 +13,11 @@ Ako::Application.routes.draw do
 
   resources :accounts
 
-  resources :expenses
+  resources :expenses do
+    collection do
+      post "candidates_for_bill(/:bill_id)" => 'expenses#candidates_for_bill'
+    end
+  end
 
   get 'report' => 'report#monthly_index', as: :monthly_report_index
   get 'report/weekly' => 'report#weekly_index', as: :weekly_report_index

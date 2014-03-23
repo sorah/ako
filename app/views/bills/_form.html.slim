@@ -36,6 +36,7 @@
         .expense_title_field.form-control style=(@bill.expense ? '' : 'display: none;')
           - if @bill.expense
             = @bill.expense.title
+        .candidates
   .form-group
     = f.label :account_id, class: 'col-md-2 control-label'
     .col-md-10.btnish-radio

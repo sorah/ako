@@ -23,8 +23,26 @@ initializer = ->
     id_input = self.find('input')
 
     title_field = self.find('.expense_title_field')
+    candidates = self.find('.candidates')
+    candidates.hide()
 
-    show_candidates = -> 42 # do nothing
+    show_candidates = ->
+      bill_id = self.closest('form').data('id')
+      console.log "show candidates for bill:#{bill_id}"
+      return unless bill_id
+      $.post("/expenses/candidates_for_bill/#{bill_id}", (html) ->
+        candidates.html html
+        candidates.find('li').click ->
+          expense_id = $(this).data('id')
+          title_field.text($(this).text()).show()
+          id_input.val(expense_id)
+          id_field.hide()
+          candidates.hide()
+        candidates.show()
+      )
+
+    id_input.focus ->
+      show_candidates()
 
     title_field.click ->
       title_field.hide()
@@ -35,7 +53,7 @@ initializer = ->
       timeout = null
       id_field.keyup ->
         clearTimeout(timeout) if timeout
-        timeout = setTimeout(show_candidates, 250)
+        timeout = setTimeout(show_candidates, 1000)
     )()
 
     show_title = ->
@@ -43,7 +61,8 @@ initializer = ->
         id_field.hide()
         title_field.text(title).show()
 
-    id_input.blur -> show_title()
+    id_input.blur ->
+      show_title()
 
 jQuery ($) ->
   $(document).bind('page:change', -> initializer())
