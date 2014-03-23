@@ -5,7 +5,7 @@ FactoryGirl.define do
     amount 100
     title "shop:2014030901"
     billed_at Time.now
-    meta({"test" => "value"}.to_json)
+    meta("test" => "value")
 
     # place_id ""
     # account_id ""
