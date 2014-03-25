@@ -37,3 +37,18 @@
     }
   }
 }
+
+.expense-card {
+  .attributes .name {
+    text-align: right;
+  }
+
+  .actions .btn {
+    display: block;
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+  }
+}
