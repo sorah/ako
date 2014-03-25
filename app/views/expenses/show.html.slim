@@ -6,7 +6,7 @@
 
   .actions
     p
-      => link_to edit_expense_path(@expense), title: 'Edit', class: 'btn btn-delete' do
+      => link_to edit_expense_path(@expense), title: 'Edit', class: 'btn btn-default' do
         i.icon-pencil>
         | Edit
       = link_to @expense, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Delete', class: 'btn btn-danger' do
