@@ -36,4 +36,4 @@
     .col-md-10.btnish-radio
       = f.collection_radio_buttons :account_id, Account.all, :id, ->(_) { "<i class=\"icon-#{_.icon}\"></i> ".html_safe + _.name }
   .actions
-    = f.submit 'Save', class: 'btn btn-default'
+    = f.submit 'Save', class: 'btn btn-primary'
