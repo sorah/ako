@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
-  revision: 82f1b343ffc0069bf99d2a3d4f0190bc87ba89ed
-  ref: 3
-  specs:
-    bootstrap-sass (3.0.0.0)
-      sass (~> 3.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -35,6 +27,8 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.11)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
     builder (3.1.4)
     coderay (1.0.9)
     coffee-rails (4.0.0)
@@ -169,7 +163,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass!
+  bootstrap-sass (~> 3.1.1)
   coffee-rails (~> 4.0.0)
   database_rewinder
   factory_girl_rails (~> 4.0)

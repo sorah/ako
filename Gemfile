@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'puma'
 gem 'slim-rails'
 gem 'font-awesome-rails'
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass', ref: '3'
+gem 'bootstrap-sass', '~> 3.1.1'
 
 gem 'nokogiri'
 
