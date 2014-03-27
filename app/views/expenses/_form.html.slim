@@ -12,7 +12,7 @@
       = f.number_field :amount, class: 'form-control input-lg'
 
   .form-group
-    = f.label :place_name, class: 'col-md-2 control-label'
+    = f.label :place_name, 'Place', class: 'col-md-2 control-label'
     .col-md-10
       = render 'shared/place_field', obj: @expense, form: f
   .form-group
@@ -24,7 +24,7 @@
     .col-md-10.datetime-select
       = f.datetime_select :paid_at, {}, class: 'form-control'
   .form-group
-    = f.label :sub_category_id, class: 'col-md-2 control-label'
+    = f.label :sub_category_id, 'Category', class: 'col-md-2 control-label'
     .col-md-10
       = f.grouped_collection_select :sub_category_id, Category.includes(sub_categories: :category), :sub_categories, :name, :id, ->(_) { "#{_.category.name}: #{_.name}" }, {}, class: 'form-control'
   .form-group

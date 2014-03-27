@@ -1,5 +1,24 @@
 @import "bootstrap";
 
+.new-expense {
+  @include center-block;
+  text-align: center;
+
+  .row {
+    text-align: left;
+  }
+
+  @media (min-width: $screen-lg-min) {
+    width: 500px;
+  }
+  @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+    width: 50%;
+  }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    width: 80%;
+  }
+}
+
 .expenses-week > .panel-heading {
   .panel-title {
     font-size: 0.9em;
