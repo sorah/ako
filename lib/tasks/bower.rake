@@ -21,6 +21,20 @@ namespace :bower do
           raise unless e.message.start_with?("same file: ")
         end
       end
+
+      dest = Rails.root.join('vendor', 'assets', 'stylesheets').to_s
+      %w(
+        bower_components/pickadate/lib/compressed/themes/classic.css
+        bower_components/pickadate/lib/compressed/themes/classic.date.css
+        bower_components/pickadate/lib/compressed/themes/classic.time.css
+      ).each do |src|
+        puts "#{src} -> #{dest}"
+        begin
+          FileUtils.cp src, dest
+        rescue ArgumentError => e
+          raise unless e.message.start_with?("same file: ")
+        end
+      end
     end
   end
 end
