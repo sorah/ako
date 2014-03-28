@@ -1,0 +1,21 @@
+{
+  "name": "ako",
+  "version": "0.0.1",
+  "homepage": "https://github.com/sorah/ako",
+  "authors": [
+    "Shota Fukumori (sora_h) <her@sorah.jp>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pickadate": "~3.4.0",
+    "typeahead.js": "~0.10.2"
+  }
+}
