@@ -1,1 +1,0 @@
-../../../bower_components/pickadate/lib/compressed/picker.time.js

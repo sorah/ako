@@ -11,7 +11,6 @@
  *= require font-awesome
  *= require classic
  *= require classic.date
- *= require classic.time
  *= require_self
  *= require_tree .
  */
