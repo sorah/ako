@@ -25,14 +25,14 @@ section.expenses
             .col-md-1.account data-id=expense.account_id
               - if expense.account
                 i class=expense.account.icon_class
-                = expense.account.name
+                span = expense.account.name
 
             - if expense.category
               - category = expense.category
               - sub_category = expense.sub_category
               .col-md-2.category data-category-id=category.id data-sub-category-name=sub_category.name data-sub-category-id=sub_category.id
                 i> class=category.icon_class
-                | #{sub_category.name}
+                span = sub_category.name
             - else
               .col-md-2.category
 
