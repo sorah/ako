@@ -1,0 +1,13 @@
+.pickadate-target
+  = form.hidden_field attr, class: 'hidden_field',
+    value: form.object.try(attr).try(:xmlschema)
+
+  input.form-control.date-input
+  select.form-control.hour-input
+    - (0..23).each do |h|
+      option value=h = h.to_s.rjust(2, '0')
+  | :
+  select.form-control.minute-input
+    - (0..59).each do |m|
+      option value=m = m.to_s.rjust(2, '0')
+

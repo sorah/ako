@@ -21,8 +21,8 @@
       = f.text_area :comment, class: 'form-control'
   .form-group
     = f.label :paid_at, class: 'col-md-2 control-label'
-    .col-md-10.datetime-select
-      = f.datetime_select :paid_at, {}, class: 'form-control'
+    .col-md-10
+      = render 'shared/pickadate', form: f, attr: :paid_at
   .form-group
     = f.label :sub_category_id, 'Category', class: 'col-md-2 control-label'
     .col-md-10

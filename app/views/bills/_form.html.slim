@@ -12,8 +12,8 @@
       = f.number_field :amount, class: 'form-control input-lg'
   .form-group
     = f.label :billed_at, class: 'col-md-2 control-label'
-    .col-md-10.datetime-select
-      = f.datetime_select :billed_at, {}, class: 'form-control'
+    .col-md-10
+      = render 'shared/pickadate', form: f, attr: :billed_at
   .form-group
     = f.label :place_id, class: 'col-md-2 control-label'
     .col-md-10
