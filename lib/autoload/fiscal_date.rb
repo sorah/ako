@@ -173,7 +173,9 @@ module FiscalDate
     end
 
     def to_s
-      "#{self.month.year}/#{self.month.number}: Week #{self.number} (#{range.inspect})"
+      "#{self.month.year}/#{self.month.number}: Week #{self.number}" \
+      " (#{I18n.l(self.begin, format: :short)}.." \
+        "#{I18n.l(self.end,   format: :short)})"
     end
 
     def ==(o)
