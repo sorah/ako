@@ -30,7 +30,7 @@ section.expenses
             - if expense.category
               - category = expense.category
               - sub_category = expense.sub_category
-              .col-md-2.category data-category-name=category.name data-category-id=category.id data-sub-category-name=sub_category.name data-sub-category-id=sub_category.id
+              .col-md-2.category data-category-id=category.id data-sub-category-name=sub_category.name data-sub-category-id=sub_category.id
                 i> class=category.icon_class
                 | #{sub_category.name}
             - else
