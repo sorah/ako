@@ -47,6 +47,11 @@
 }
 
 .expense {
+  .page-header {
+    @media (max-width: $screen-xs-max) {
+      font-size: 24px;
+    }
+  }
   .attributes {
     .row {
       .name {
