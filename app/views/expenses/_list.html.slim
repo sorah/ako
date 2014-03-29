@@ -40,7 +40,7 @@ section.expenses
 
             .col-md-2.place data-id=expense.place_id = expense.place.try(&:name)
 
-            .col-md-3.comment= expense.comment.lines.map(&:chomp).join(' ')[0, 100]
+            .col-md-3.comment= expense.comment.lines.map(&:chomp).join(' ')
 
             .col-md-1.actions
               => link_to expense_path(expense), title: 'Show' do
