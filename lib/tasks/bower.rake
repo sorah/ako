@@ -11,29 +11,19 @@ namespace :bower do
       %w(
         bower_components/pickadate/lib/compressed/picker.js
         bower_components/pickadate/lib/compressed/picker.date.js
-        bower_components/pickadate/lib/compressed/picker.time.js
         bower_components/typeahead.js/dist/typeahead.bundle.min.js
       ).each do |src|
         puts "#{src} -> #{dest}"
-        begin
-          FileUtils.cp src, dest
-        rescue ArgumentError => e
-          raise unless e.message.start_with?("same file: ")
-        end
+        FileUtils.cp src, dest
       end
 
       dest = Rails.root.join('vendor', 'assets', 'stylesheets').to_s
       %w(
         bower_components/pickadate/lib/compressed/themes/classic.css
         bower_components/pickadate/lib/compressed/themes/classic.date.css
-        bower_components/pickadate/lib/compressed/themes/classic.time.css
       ).each do |src|
         puts "#{src} -> #{dest}"
-        begin
-          FileUtils.cp src, dest
-        rescue ArgumentError => e
-          raise unless e.message.start_with?("same file: ")
-        end
+        FileUtils.cp src, dest
       end
     end
   end
