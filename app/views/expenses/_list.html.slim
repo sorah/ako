@@ -18,8 +18,10 @@ section.expenses
 
         - expenses.each do |expense|
           section.expenses-sub.row data-id=expense.id
-            .col-md-2 style='text-align: right;' 
-              time.paid-at datetime=expense.paid_at.xmlschema = l expense.paid_at, format: :short
+            .col-md-2.paid-at
+              time.paid_at datetime=expense.paid_at.xmlschema
+                .hidden-xs= l expense.paid_at, format: :short
+                .visible-xs= l expense.paid_at.to_date, format: :short
             .col-md-1
               -if expense.account
                 .account data-id=expense.account_id

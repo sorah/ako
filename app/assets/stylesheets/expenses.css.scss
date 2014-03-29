@@ -37,8 +37,18 @@
   * {
     font-weight: bold;
   }
+}
 
-  @media (max-width: $screen-xs-max) {
+.expenses-sub.row {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid $gray-lighter;
+}
+
+// expenses-sub responsive --
+
+@media (max-width: $screen-xs-max) {
+  .expenses-sub-head {
     display: none;
 
     & + .expenses-sub.row {
@@ -49,11 +59,13 @@
   }
 }
 
-.expenses-sub.row {
-  margin-top: 4px;
-  padding-top: 4px;
-  border-top: 1px solid $gray-lighter;
-}
+@media (min-width: $screen-md-min) {
+  .paid-at {
+    text-align: right;
+  }
+} 
+
+// --
 
 .expense {
   .page-header {
