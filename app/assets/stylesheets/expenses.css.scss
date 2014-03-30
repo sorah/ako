@@ -44,7 +44,83 @@
   padding-top: 4px;
   border-top: 1px solid $gray-lighter;
 
+  .comment, .place {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
+
+// expenses-sub responsive --
+
+@media (max-width: $screen-xs-max) {
+  .expenses-sub-head {
+    display: none;
+
+    & + .expenses-sub.row {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+  }
+
+  .expenses-sub.row {
+    margin-bottom: 10px;
+
+    .paid-at, .account, .category {
+      display: inline;
+
+      .visible-xs {
+        display: inline !important;
+      }
+    }
+
+    .account, .category {
+      margin: 0;
+      margin-right: 8px;
+      font-size: 110%;
+      padding: 0;
+
+      span {
+        display: none;
+      }
+    }
+
+    .comment {
+      display: none;
+      overflow: visible;
+      white-space: normal;
+      margin-top: 5px;
+    }
+
+    .amount {
+      font-size: 180%;
+    }
+
+    .actions {
+      margin-top: 10px;
+      display: none;
+
+      a {
+        margin-right: 20px;
+      }
+    }
+
+    &.toggled {
+      .actions, .comment {
+        display: block;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .paid-at {
+    text-align: right;
+  }
+} 
+
+// --
 
 .expense {
   .page-header {

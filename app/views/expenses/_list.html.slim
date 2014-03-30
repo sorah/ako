@@ -18,37 +18,34 @@ section.expenses
 
         - expenses.each do |expense|
           section.expenses-sub.row data-id=expense.id
-            .col-md-2 style='text-align: right;' 
-              time.paid-at datetime=expense.paid_at.xmlschema = l expense.paid_at, format: :short
-            .col-md-1
-              -if expense.account
-                .account data-id=expense.account_id
-                  i class=expense.account.icon_class 
-                  = expense.account.name
+            .col-md-2.paid-at
+              time.paid_at datetime=expense.paid_at.xmlschema
+                .hidden-xs= l expense.paid_at, format: :short
+                .visible-xs= l expense.paid_at.to_date, format: :short
+            .col-md-1.account data-id=expense.account_id
+              - if expense.account
+                i class=expense.account.icon_class
+                span = expense.account.name
 
-            .col-md-2
-              - if expense.category
-                - category = expense.category
-                - sub_category = expense.sub_category
-                .category data-category-name=category.name data-category-id=category.id data-sub-category-name=sub_category.name data-sub-category-id=sub_category.id
-                  i> class=category.icon_class 
-                  | #{sub_category.name}
+            - if expense.category
+              - category = expense.category
+              - sub_category = expense.sub_category
+              .col-md-2.category data-category-id=category.id data-sub-category-name=sub_category.name data-sub-category-id=sub_category.id
+                i> class=category.icon_class
+                span = sub_category.name
+            - else
+              .col-md-2.category
 
-            .col-md-1
-              .amount= expense.amount
+            .col-md-1.amount= expense.amount
 
-            .col-md-2
-              - if expense.place
-                td.place data-id=expense.place_id = expense.place.name
+            .col-md-2.place data-id=expense.place_id = expense.place.try(&:name)
 
-            .col-md-3
-              .comment= expense.comment.lines.map(&:chomp).join(' ')[0, 100]
+            .col-md-3.comment= expense.comment.lines.map(&:chomp).join(' ')
 
-            .col-md-1
-              .actions
-                => link_to expense_path(expense), title: 'Show' do
-                  i.icon-info-sign.icon-large
-                => link_to edit_expense_path(expense), title: 'Edit' do
-                  i.icon-pencil.icon-large
-                = link_to expense, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
-                  i.icon-remove.icon-large
+            .col-md-1.actions
+              => link_to expense_path(expense), title: 'Show' do
+                i.icon-info-sign.icon-large
+              => link_to edit_expense_path(expense), title: 'Edit' do
+                i.icon-pencil.icon-large
+              = link_to expense, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
+                i.icon-remove.icon-large
