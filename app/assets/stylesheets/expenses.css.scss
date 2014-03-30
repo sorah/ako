@@ -53,7 +53,7 @@
 
 // expenses-sub responsive --
 
-@media (max-width: $screen-xs-max) {
+@media (max-width: $screen-sm-max) {
   .expenses-sub-head {
     display: none;
 
@@ -124,7 +124,7 @@
 
 .expense {
   .page-header {
-    @media (max-width: $screen-xs-max) {
+    @media (max-width: $screen-sm-max) {
       font-size: 24px;
     }
   }
