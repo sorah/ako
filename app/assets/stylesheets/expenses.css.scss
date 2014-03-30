@@ -65,7 +65,13 @@
   }
 
   .expenses-sub.row {
-    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    &:last-child {
+      padding-bottom: 0px;
+      margin-bottom: 0;
+    }
 
     .paid-at, .account, .category {
       display: inline;
