@@ -20,8 +20,7 @@ section.expenses
           section.expenses-sub.row data-id=expense.id
             .col-md-2.paid-at
               time.paid_at datetime=expense.paid_at.xmlschema
-                .hidden-xs= l expense.paid_at, format: :short
-                .visible-xs= l expense.paid_at.to_date, format: :short
+                = l expense.paid_at.to_date, format: :short
             .col-md-1.account data-id=expense.account_id
               - if expense.account
                 i class=expense.account.icon_class
