@@ -1,11 +1,12 @@
 .place_field data-place-id-name="#{form.object_name}[place_id]"
+
   .place_id_field.form-control style=(obj.place ? '' : 'display: none;')
     - if obj.place
       = obj.place.name
       = form.hidden_field :place_id
+
   .place_name_field style=(obj.place && 'display: none;')
-    - if obj.place
-      = form.text_field :place_name, class: 'form-control', value: ''
-    - else
-      = form.text_field :place_name, class: 'form-control'
+    = form.text_field :place_name, class: 'form-control',
+      value: obj.place.present? ? obj.place.name : ''
+
     .place_name_candidates
