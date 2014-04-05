@@ -67,7 +67,14 @@ class PlacesController < ApplicationController
     # XXX: Move the logic to model
     @places = Place.where('name like ?', params[:name].gsub(/[%_]/,'\\\\\0') +'%')
 
-    render :candidates_for_expense, layout: false
+    respond_to do |format|
+      format.html { render :candidates_for_expense, layout: false }
+      format.json do
+        render json: {
+          places: @places.select(:id, :name).map { |_| {id: _.id, name: _.name} },
+        }
+      end
+    end
   end
 
   private
