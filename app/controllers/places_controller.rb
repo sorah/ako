@@ -65,16 +65,7 @@ class PlacesController < ApplicationController
   def candidates_for_expense
     raise HTTPStatus::BadRequest, "you're not via XHR" unless request.xhr?
 
-    # XXX: Move the logic to model
-    @places = find_places(params[:name])
-
-    # For Japanese, CJK Unified Ideographs = \u4e00 - 9fff
-    if @places.empty? && /[\u4e00-\u9fff]|\p{Hiragana}|\p{Katakana}/ === params[:name]
-      name = params[:name] \
-        .gsub(/[a-zａ-ｚ]$/, '') # Incomplete romaji
-        .gsub(/[▼▽].*$/, '') # For SKK users
-      @places = find_places(name)
-    end
+    @places = Place.candidates_for_expense(params[:name], name_only: true)
 
     respond_to do |format|
       format.json do
@@ -94,11 +85,5 @@ class PlacesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def place_params
       params.require(:place).permit(:name, :foursquare_venue_id, :latitude, :longitude)
-    end
-
-    def find_places(name)
-      # XXX: Move the logic to model
-      Place.where('name like ?', name.gsub(/[%_]/,'\\\\\0') +'%') \
-        .select(:id, :name).load
     end
 end

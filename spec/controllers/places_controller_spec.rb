@@ -130,19 +130,21 @@ describe PlacesController do
       request.env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
     end
 
-    let!(:place_a) { create(:place, name: 'aab') }
-    let!(:place_b) { create(:place, name: 'abb') }
-    let!(:place_c) { create(:place, name: 'abc') }
+    let(:place_a) { create(:place, name: 'aba') }
+    let(:place_b) { create(:place, name: 'abc') }
 
     it "renders candidates for expense" do
+      allow(Place).to receive(:candidates_for_expense).with('ab', name_only: true) \
+        .and_return([place_a, place_b])
+
       post :candidates_for_expense, {name: 'ab', format: 'json'}, valid_session
 
       expect(response.code).to eq '200'
       response_json = JSON.parse(response.body)
       expect(response_json).to eq(
         "places" => [
+          {"id" => place_a.id, "name" => place_a.name},
           {"id" => place_b.id, "name" => place_b.name},
-          {"id" => place_c.id, "name" => place_c.name},
         ],
       )
     end
@@ -151,32 +153,6 @@ describe PlacesController do
       request.env.delete 'HTTP_X_REQUESTED_WITH'
       post :candidates_for_expense, {name: 'ab'}, valid_session
       expect(response.code).to eq '400'
-    end
-
-    context "with Japanese like query" do
-      let!(:place_ja) { create(:place, name: 'らりる') }
-
-      it "removes one trailing lowercase alphabet for querying" do
-        post :candidates_for_expense, {name: 'らりr', format: 'json'}, valid_session
-
-        expect(response.code).to eq '200'
-        response_json = JSON.parse(response.body)
-        expect(response_json['places']).to eq(
-          ["id" => place_ja.id, "name" => place_ja.name]
-        )
-      end
-
-      context "for SKK users" do
-        it "removes string of SKK composition for querying" do
-          post :candidates_for_expense, {name: 'ら▽りる', format: 'json'}, valid_session
-
-          expect(response.code).to eq '200'
-          response_json = JSON.parse(response.body)
-          expect(response_json['places']).to eq(
-            ["id" => place_ja.id, "name" => place_ja.name]
-          )
-        end
-      end
     end
   end
 end
