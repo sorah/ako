@@ -152,5 +152,19 @@ describe PlacesController do
       post :candidates_for_expense, {name: 'ab'}, valid_session
       expect(response.code).to eq '400'
     end
+
+    context "with Japanese like query" do
+      let!(:place_ja) { create(:place, name: 'らりる') }
+
+      it "removes one trailing lowercase alphabet for querying" do
+        post :candidates_for_expense, {name: 'らりr', format: 'json'}, valid_session
+
+        expect(response.code).to eq '200'
+        response_json = JSON.parse(response.body)
+        expect(response_json['places']).to eq(
+          ["id" => place_ja.id, "name" => place_ja.name]
+        )
+      end
+    end
   end
 end

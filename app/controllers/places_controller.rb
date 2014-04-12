@@ -64,8 +64,14 @@ class PlacesController < ApplicationController
 
   def candidates_for_expense
     raise HTTPStatus::BadRequest, "you're not via XHR" unless request.xhr?
+
     # XXX: Move the logic to model
     @places = find_places(params[:name])
+
+    # For Japanese, CJK Unified Ideographs = \u4e00 - 9fff
+    if @places.empty? && /[\u4e00-\u9fff]|\p{Hiragana}|\p{Katakana}/ === params[:name]
+      @places = find_places(params[:name].gsub(/[a-zａ-ｚ]$/, ''))
+    end
 
     respond_to do |format|
       format.json do
