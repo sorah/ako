@@ -165,6 +165,18 @@ describe PlacesController do
           ["id" => place_ja.id, "name" => place_ja.name]
         )
       end
+
+      context "for SKK users" do
+        it "removes string of SKK composition for querying" do
+          post :candidates_for_expense, {name: 'ら▽りる', format: 'json'}, valid_session
+
+          expect(response.code).to eq '200'
+          response_json = JSON.parse(response.body)
+          expect(response_json['places']).to eq(
+            ["id" => place_ja.id, "name" => place_ja.name]
+          )
+        end
+      end
     end
   end
 end

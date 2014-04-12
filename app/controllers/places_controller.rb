@@ -70,7 +70,10 @@ class PlacesController < ApplicationController
 
     # For Japanese, CJK Unified Ideographs = \u4e00 - 9fff
     if @places.empty? && /[\u4e00-\u9fff]|\p{Hiragana}|\p{Katakana}/ === params[:name]
-      @places = find_places(params[:name].gsub(/[a-zａ-ｚ]$/, ''))
+      name = params[:name] \
+        .gsub(/[a-zａ-ｚ]$/, '') # Incomplete romaji
+        .gsub(/[▼▽].*$/, '') # For SKK users
+      @places = find_places(name)
     end
 
     respond_to do |format|
