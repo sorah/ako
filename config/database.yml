@@ -8,6 +8,7 @@ development:
   database: ako_development
   host: localhost
   username: ako
+  collation: utf8_unicode_ci
   pool: 5
   timeout: 5000
 
@@ -23,5 +24,6 @@ test:
 <% else %>
   username: ako
 <% end %>
+  collation: utf8_unicode_ci
   pool: 5
   timeout: 5000
