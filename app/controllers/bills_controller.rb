@@ -80,6 +80,12 @@ class BillsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bill_params
-      params.require(:bill).permit(:amount, :title, :billed_at, :meta, :place_id, :account_id, :expense_id)
+      bill = params.require(:bill).permit(:amount, :title, :billed_at, :meta, :place_id, :place_name, :account_id, :expense_id)
+      if bill[:place_name].present? && bill[:place_id].present?
+        bill.delete :place_name
+        bill.delete 'place_name'
+      end
+
+      bill
     end
 end

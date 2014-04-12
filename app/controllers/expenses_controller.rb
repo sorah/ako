@@ -78,8 +78,15 @@ class ExpensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_params
-      params.require(:expense) \
-            .permit(:place_id, :amount, :comment, :paid_at, :fixed,
-                    :sub_category_id, :account_id, :place_name)
+      expense = params.require(:expense) \
+                  .permit(:place_id, :amount, :comment, :paid_at, :fixed,
+                          :sub_category_id, :account_id, :place_name, :place_id)
+
+      if expense[:place_name].present? && expense[:place_id].present?
+        expense.delete :place_name
+        expense.delete 'place_name'
+      end
+
+      expense
     end
 end

@@ -81,6 +81,15 @@ describe BillsController do
         expect(Bill.last.meta['test']).to eq 'hello'
       end
     end
+
+    context "with both place_name and place_id" do
+      let(:place) { create(:place) }
+
+      it "accepts place_id" do
+        post :create, {bill: {amount: 100, place_id: place.id, place_name: 'foo bar'}}, valid_session
+        expect(Bill.last.place_id).to eq place.id
+      end
+    end
   end
 
   describe "PUT update" do
@@ -137,6 +146,15 @@ describe BillsController do
         put :update, {id: bill.to_param, bill: {amount: 10}}, valid_session
           expect(bill.reload.meta['hello']).to eq 'hola'
         end
+      end
+    end
+
+    context "with both place_name and place_id" do
+      let(:place) { create(:place) }
+
+      it "accepts place_id" do
+        put :update, {id: bill.to_param, bill: {place_id: place.id, place_name: 'foo bar'}}, valid_session
+        expect(bill.reload.place_id).to eq place.id
       end
     end
   end

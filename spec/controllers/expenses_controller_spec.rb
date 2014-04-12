@@ -85,6 +85,16 @@ describe ExpensesController, clean_db: true do
         response.should render_template("new")
       end
     end
+
+    context "with both place_id and place_name" do
+      let(:place) { create(:place) }
+
+      it "accepts place_id" do
+        post :create, {expense: valid_attributes.merge(place_id: place.id, place_name: 'foo bar')}, valid_session
+
+        expect(Expense.last.place_id).to eq place.id
+      end
+    end
   end
 
   describe "PUT update" do
@@ -118,6 +128,16 @@ describe ExpensesController, clean_db: true do
         Expense.any_instance.stub(:save).and_return(false)
         put :update, {:id => expense.to_param, expense: {"amount" => "-1"}}, valid_session
         response.should render_template("edit")
+      end
+    end
+
+    context "with both place_id and place_name" do
+      let(:place) { create(:place) }
+
+      it "accepts place_id" do
+        put :update, {id: expense.id, expense: {place_id: place.id, place_name: 'foo bar'}}, valid_session
+
+        expect(expense.reload.place_id).to eq place.id
       end
     end
   end
