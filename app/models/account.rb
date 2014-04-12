@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
   validates_presence_of :name
 
   def icon
-    attributes["icon"] || 'usd'
+    attributes['icon'] || 'usd'
   end
 
   def icon_class

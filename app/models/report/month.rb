@@ -8,7 +8,7 @@ class Report
         @fiscal_month = FiscalDate::Month.new(*args) # year, month
       when 1
         unless args.first.kind_of?(FiscalDate::Month)
-          raise TypeError, "passed object is not FiscalDate::Month"
+          raise TypeError, 'passed object is not FiscalDate::Month'
         end
 
         @fiscal_month = args.first

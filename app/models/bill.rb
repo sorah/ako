@@ -9,9 +9,7 @@ class Bill < ActiveRecord::Base
   validates_presence_of :amount
 
   before_validation do
-    if self.new_record?
-      self.billed_at ||= Time.now
-    end
+    self.billed_at ||= Time.now if self.new_record?
   end
 
   include PlaceNameAccessor
@@ -43,7 +41,7 @@ class Bill < ActiveRecord::Base
       score -= 230 if same_place
       score -= 120 if same_account
       if same_amount
-        score -= 100 
+        score -= 100
       elsif near_amount
         score -= 50
       end

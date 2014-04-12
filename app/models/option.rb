@@ -20,7 +20,7 @@ class Option < ActiveRecord::Base
       Rails.cache.delete("options_#{k}")
     end
 
-    def default(h=nil)
+    def default(h = nil)
       @defaults ||= {}
       @defaults.merge!(h) if h
       @defaults
@@ -36,7 +36,7 @@ class Option < ActiveRecord::Base
   end
 
   def value=(o)
-    val = Marshal.dump(o)
+    Marshal.dump(o)
   end
 
   default month_starts: 1, week_starts: 0

@@ -8,7 +8,7 @@ class Report
         @date = Date.new(*args.map(&:to_i))
       when 1
         unless args.first.kind_of?(Date)
-          raise TypeError, "passed object is not Date"
+          raise TypeError, 'passed object is not Date'
         end
 
         @date = args.first

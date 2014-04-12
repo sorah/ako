@@ -4,9 +4,7 @@ module PlaceNameAccessor
   end
 
   def place_name=(o)
-    if o.present?
-      self.place = Place.find_or_create_by(name: o)
-    end
+    self.place = Place.find_or_create_by(name: o) if o.present?
 
     o
   end

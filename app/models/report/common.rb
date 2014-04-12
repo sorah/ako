@@ -16,7 +16,8 @@ class Report
       @_categories = nil if reload
       return @_categories if @_categories
 
-      expenses = self.expenses.includes(:sub_category => :category)
+      expenses = self.expenses.includes(sub_category: :category)
+      # rubocop:disable Blocks
       @_categories = Hash[expenses.group_by { |_| _.category }.map { |category, es|
         [category.id, {
           category: category,
@@ -33,6 +34,7 @@ class Report
           }]
         }]
       }]
+      # rubocop:enable Blocks
     end
   end
 end

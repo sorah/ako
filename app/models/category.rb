@@ -1,3 +1,4 @@
+# rubocop:disable UselessAssignment
 class Category < ActiveRecord::Base
   has_many :sub_categories
 
@@ -9,7 +10,7 @@ class Category < ActiveRecord::Base
   accepts_nested_attributes_for :sub_categories, allow_destroy: true
 
   def variable?
-    ! fixed?
+    !fixed?
   end
 
   class << self
@@ -25,24 +26,22 @@ class Category < ActiveRecord::Base
   end
 
   def base_budget
-    read_attribute(:budget)
+    self[:budget]
   end
 
   def budget(*args)
     # TODO: adjustable budget
-    if 2 <= args.size
-      year, month = args[0, 2]
-    end
+    year, month = args[0, 2] if 2 <= args.size
     base_budget
   end
 
   def expenses
     Expense.joins(:sub_category) \
-           .where(sub_categories: {category_id: self.id})
+           .where(sub_categories: { category_id: self.id })
   end
 
   def icon
-    attributes["icon"] || 'shopping-cart'
+    attributes['icon'] || 'shopping-cart'
   end
 
   def icon_class

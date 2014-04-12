@@ -34,16 +34,16 @@ class Expense < ActiveRecord::Base
   end
 
   scope :fixed, -> {
-    joins(sub_category: :category).
-    where('`expenses`.`fixed` = ? OR `categories`.`fixed` = ?', true, true)
+    joins(sub_category: :category) \
+      .where('`expenses`.`fixed` = ? OR `categories`.`fixed` = ?', true, true)
   }
   scope :variable, -> {
-    joins(sub_category: :category).
-    where('`expenses`.`fixed` = ? AND `categories`.`fixed` = ?', false, false)
+    joins(sub_category: :category) \
+      .where('`expenses`.`fixed` = ? AND `categories`.`fixed` = ?', false, false)
   }
 
   def fixed?
-    read_attribute(:fixed) || self.category.fixed?
+    self[:fixed] || self.category.fixed?
   end
 
   def variable?
@@ -73,16 +73,16 @@ class Expense < ActiveRecord::Base
   end
 
   def comment
-    read_attribute(:comment) || ''
+    self[:comment] || ''
   end
 
-  def category(reload=nil)
+  def category(reload = nil)
     @category = nil if reload
-    if association(:sub_category).loaded? 
+    if association(:sub_category).loaded?
       @category ||= sub_category.category
     else
       @category ||= Category.joins(:sub_categories) \
-                            .where(sub_categories: {id: self.sub_category_id}).first
+                            .where(sub_categories: { id: self.sub_category_id }).first
     end
   end
 

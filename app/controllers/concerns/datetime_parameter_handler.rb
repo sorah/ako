@@ -1,5 +1,6 @@
 require 'time'
 
+# rubocop:disable RescueModifier
 module DatetimeParameterHandler
   private
 
