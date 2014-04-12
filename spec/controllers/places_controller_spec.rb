@@ -134,29 +134,17 @@ describe PlacesController do
     let!(:place_b) { create(:place, name: 'abb') }
     let!(:place_c) { create(:place, name: 'abc') }
 
-    context "when HTML is requested" do
-      it "renders candidates for expense" do
-        # FIXME: Remove after migrated to typeahead.js
-        post :candidates_for_expense, {name: 'ab', format: 'html'}, valid_session
+    it "renders candidates for expense" do
+      post :candidates_for_expense, {name: 'ab', format: 'json'}, valid_session
 
-        expect(assigns(:places)).to eq [place_b, place_c]
-        expect(response).to render_template("candidates_for_expense")
-      end
-    end
-
-    context "when JSON is requested" do
-      it "renders candidates for expense" do
-        post :candidates_for_expense, {name: 'ab', format: 'json'}, valid_session
-
-        expect(response.code).to eq '200'
-        response_json = JSON.parse(response.body)
-        expect(response_json).to eq(
-          "places" => [
-            {"id" => place_b.id, "name" => place_b.name},
-            {"id" => place_c.id, "name" => place_c.name},
-          ],
-        )
-      end
+      expect(response.code).to eq '200'
+      response_json = JSON.parse(response.body)
+      expect(response_json).to eq(
+        "places" => [
+          {"id" => place_b.id, "name" => place_b.name},
+          {"id" => place_c.id, "name" => place_c.name},
+        ],
+      )
     end
 
     it "rejects not XHR" do

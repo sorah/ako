@@ -68,7 +68,6 @@ class PlacesController < ApplicationController
     @places = Place.where('name like ?', params[:name].gsub(/[%_]/,'\\\\\0') +'%')
 
     respond_to do |format|
-      format.html { render :candidates_for_expense, layout: false }
       format.json do
         render json: {
           places: @places.select(:id, :name).map { |_| {id: _.id, name: _.name} },
