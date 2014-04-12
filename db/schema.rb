@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20140308222850) do
     t.boolean  "fixed",           default: false
   end
 
+  add_index "expenses", ["paid_at", "fixed"], name: "index_expenses_on_paid_at_and_fixed", using: :btree
+
   create_table "options", force: true do |t|
     t.string   "tag"
     t.binary   "val"
