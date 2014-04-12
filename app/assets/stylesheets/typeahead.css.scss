@@ -1,0 +1,35 @@
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+.twitter-typeahead {
+  width: 100%;
+
+  .tt-hint {
+    color: $gray-light;
+  }
+
+  .tt-dropdown-menu {
+    @include box-shadow(0 6px 12px rgba(0,0,0,.175));
+    width: 100%;
+
+    border-radius: $border-radius-base;
+    border: 1px solid $dropdown-border;
+    background-color: $dropdown-bg;
+    padding: $padding-base-vertical 0;
+    margin-top: 10px;
+  }
+
+  .tt-suggestion {
+    padding: $padding-base-vertical $padding-base-horizontal;
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .tt-cursor {
+    color: $dropdown-link-hover-color;
+    background-color: $dropdown-link-hover-bg;
+  }
+}
