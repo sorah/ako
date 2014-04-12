@@ -52,6 +52,7 @@ group :test, :development do
 
   gem 'pry'
 
+  gem 'rubocop'
 end
 
 group :doc do

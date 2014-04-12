@@ -1,0 +1,43 @@
+AllCops:
+  Include:
+    - Rakefile
+    - Gemfile
+    - config.ru
+  Exclude:
+    - bin/*
+    - db/schema.rb
+  RunRailsCops: true
+
+Documentation:
+  Enabled: false
+
+LineLength:
+  Max: 127
+
+ClassAndModuleChildren:
+  Enabled: false
+
+SignalException:
+  Enabled: false
+
+RedundantSelf:
+  Enabled: false
+
+SingleLineMethods:
+  Enabled: false
+
+StringLiterals:
+  Severity: warning
+
+TrailingComma:
+  Enabled: false
+
+EmptyLineBetweenDefs:
+  Enabled: false
+
+PercentLiteralDelimiters:
+  Enabled: false
+
+Lambda:
+  Enabled: false
+
