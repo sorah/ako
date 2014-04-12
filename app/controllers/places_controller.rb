@@ -65,12 +65,12 @@ class PlacesController < ApplicationController
   def candidates_for_expense
     raise HTTPStatus::BadRequest, "you're not via XHR" unless request.xhr?
     # XXX: Move the logic to model
-    @places = Place.where('name like ?', params[:name].gsub(/[%_]/,'\\\\\0') +'%')
+    @places = find_places(params[:name])
 
     respond_to do |format|
       format.json do
         render json: {
-          places: @places.select(:id, :name).map { |_| {id: _.id, name: _.name} },
+          places: @places.map { |_| {id: _.id, name: _.name} },
         }
       end
     end
@@ -85,5 +85,11 @@ class PlacesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def place_params
       params.require(:place).permit(:name, :foursquare_venue_id, :latitude, :longitude)
+    end
+
+    def find_places(name)
+      # XXX: Move the logic to model
+      Place.where('name like ?', name.gsub(/[%_]/,'\\\\\0') +'%') \
+        .select(:id, :name).load
     end
 end
