@@ -4,7 +4,7 @@ class Account < ActiveRecord::Base
 
   serialize :meta, Hash
 
-  validates_presence_of :name
+  validates :name, presence: true
 
   def icon
     attributes['icon'] || 'usd'

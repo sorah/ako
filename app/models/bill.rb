@@ -5,8 +5,8 @@ class Bill < ActiveRecord::Base
 
   serialize :meta, Hash
 
-  validates_presence_of :billed_at
-  validates_presence_of :amount
+  validates :billed_at, presence: true
+  validates :amount, presence: true
 
   before_validation do
     self.billed_at ||= Time.now if self.new_record?

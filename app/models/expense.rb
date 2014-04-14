@@ -7,9 +7,8 @@ class Expense < ActiveRecord::Base
 
   serialize :meta, Hash
 
-  validates_numericality_of :amount, greater_than_or_equal_to: 0
-  validates_presence_of :amount
-  validates_presence_of :paid_at
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }, presence: true
+  validates :paid_at, presence: true
 
   before_validation :assign_paid_at
 

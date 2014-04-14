@@ -4,8 +4,8 @@ class Category < ActiveRecord::Base
 
   serialize :meta, Hash
 
-  validates_presence_of :name
-  validates_presence_of :budget
+  validates :name, presence: true
+  validates :budget, presence: true
 
   accepts_nested_attributes_for :sub_categories, allow_destroy: true
 
