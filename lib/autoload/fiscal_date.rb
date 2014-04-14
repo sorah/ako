@@ -95,8 +95,8 @@ module FiscalDate
       "#<FiscalDate::Month(#{self.year}/#{self.month}): #{range.inspect}>"
     end
 
-    def ==(o)
-      o.class == self.class && [self.month, self.year] == [o.month, o.year]
+    def ==(other)
+      other.class == self.class && [self.month, self.year] == [other.month, other.year]
     end
 
     alias_method :eql?, :==
@@ -178,10 +178,10 @@ module FiscalDate
         "#{I18n.l(self.end,   format: :short)})"
     end
 
-    def ==(o)
-      o.class == self.class && \
+    def ==(other)
+      other.class == self.class && \
         [self.number, self.month.number, self.month.year, self.range] \
-          == [o.number, o.month.number, o.month.year, o.range]
+          == [other.number, other.month.number, other.month.year, other.range]
     end
 
     alias_method :eql?, :==
