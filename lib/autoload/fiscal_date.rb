@@ -1,5 +1,6 @@
 module FiscalDate
   class << self
+    # rubocop:disable MethodLength
     def locate(date_or_time)
       date = case date_or_time
              when Date
@@ -24,6 +25,7 @@ module FiscalDate
 
       [week, month]
     end
+    # rubocop:enable MethodLength
 
     def today
       self.locate(Date.today)
