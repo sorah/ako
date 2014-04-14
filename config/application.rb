@@ -17,7 +17,7 @@ module Ako
     if ENV['TRAVIS'] == 'true' # on Travis CI, test runs in UTC
       config.time_zone = 'UTC'
     else
-      config.time_zone = ENV["TZ"] || 'Asia/Tokyo'
+      config.time_zone = ENV['TZ'] || 'Asia/Tokyo'
     end
 
     config.autoload_paths << Rails.root.join('lib', 'autoload')

@@ -16,7 +16,7 @@ Ako::Application.routes.draw do
 
   resources :expenses do
     collection do
-      post "candidates_for_bill(/:bill_id)" => 'expenses#candidates_for_bill'
+      post 'candidates_for_bill(/:bill_id)' => 'expenses#candidates_for_bill'
     end
   end
 
