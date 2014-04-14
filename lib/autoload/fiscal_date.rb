@@ -144,7 +144,7 @@ module FiscalDate
     end
 
     attr_reader :range, :month, :number
-    def week() @number end
+    alias_method :week, :number
 
     def begin
       range.begin
