@@ -5,16 +5,24 @@ class Report
     def initialize(*args)
       case args.size
       when 2
-        @fiscal_month = FiscalDate::Month.new(*args) # year, month
+        initialize_with_integers(*args)
       when 1
-        unless args.first.kind_of?(FiscalDate::Month)
-          raise TypeError, 'passed object is not FiscalDate::Month'
-        end
-
-        @fiscal_month = args.first
+        initialize_with_month_object(*args)
       else
         raise ArgumentError, "wrong number of arguments (#{args.size} for 1..2)"
       end
+    end
+
+    def initialize_with_integers(year, month)
+      @fiscal_month = FiscalDate::Month.new(year, month)
+    end
+
+    def initialize_with_month_object(month)
+      unless month.kind_of?(FiscalDate::Month)
+        raise TypeError, 'passed object is not FiscalDate::Month'
+      end
+
+      @fiscal_month = month
     end
 
     attr_reader :fiscal_month

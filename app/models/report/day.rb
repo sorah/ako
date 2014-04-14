@@ -5,16 +5,22 @@ class Report
     def initialize(*args)
       case args.size
       when 3
-        @date = Date.new(*args.map(&:to_i))
+        initialize_with_integers(*args)
       when 1
-        unless args.first.kind_of?(Date)
-          raise TypeError, 'passed object is not Date'
-        end
-
-        @date = args.first
+        initialize_with_date_object(*args)
       else
         raise ArgumentError, "wrong number of arguments (#{args.size} for 1,3)"
       end
+    end
+
+    def initialize_with_integers(*args)
+      @date = Date.new(*args.map(&:to_i))
+    end
+
+    def initialize_with_date_object(date)
+      raise TypeError, 'passed object is not Date' unless date.kind_of?(Date)
+
+      @date = date
     end
 
     attr_reader :date

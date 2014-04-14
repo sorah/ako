@@ -5,16 +5,24 @@ class Report
     def initialize(*args)
       case args.size
       when 3
-        @fiscal_week = FiscalDate::Week.in(*args[0, 2])[args[-1].to_i]
+        initialize_with_integers(*args)
       when 1
-        unless args.first.kind_of?(FiscalDate::Week)
-          raise TypeError, 'passed object is not FiscalDate::Week'
-        end
-
-        @fiscal_week = args.first
+        initialize_with_week_object(*args)
       else
         raise ArgumentError, "wrong number of arguments (#{args.size} for 1,3)"
       end
+    end
+
+    def initialize_with_integers(*args)
+      @fiscal_week = FiscalDate::Week.in(*args[0, 2])[args[-1].to_i]
+    end
+
+    def initialize_with_week_object(week)
+      unless week.kind_of?(FiscalDate::Week)
+        raise TypeError, 'passed object is not FiscalDate::Week'
+      end
+
+      @fiscal_week = week
     end
 
     attr_reader :fiscal_week
