@@ -27,7 +27,6 @@ Ako::Application.routes.draw do
   get 'report/:year/:month/w/:weekno' => 'report#weekly', as: :weekly_report
   get 'report/:year/:month/:day' => 'report#daily', as: :daily_report
 
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -68,7 +67,7 @@ Ako::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
