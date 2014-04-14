@@ -48,3 +48,5 @@ PercentLiteralDelimiters:
 Lambda:
   Enabled: false
 
+CollectionMethods:
+  Enabled: false
