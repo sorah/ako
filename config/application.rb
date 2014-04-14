@@ -14,10 +14,10 @@ module Ako
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
-    unless ENV["TRAVIS"] == 'true'
-      config.time_zone = ENV["TZ"] || 'Asia/Tokyo'
-    else # on Travis CI, test runs in UTC
+    if ENV['TRAVIS'] == 'true' # on Travis CI, test runs in UTC
       config.time_zone = 'UTC'
+    else
+      config.time_zone = ENV["TZ"] || 'Asia/Tokyo'
     end
 
     config.autoload_paths << Rails.root.join('lib', 'autoload')
