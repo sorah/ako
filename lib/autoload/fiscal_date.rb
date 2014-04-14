@@ -99,8 +99,8 @@ module FiscalDate
       o.class == self.class && [self.month, self.year] == [o.month, o.year]
     end
 
-    alias eql? ==
-    alias equal? ==
+    alias_method :eql?, :==
+    alias_method :equal?, :==
 
     def hash
       [self.month, self.year].hash
@@ -184,8 +184,8 @@ module FiscalDate
           == [o.number, o.month.number, o.month.year, o.range]
     end
 
-    alias eql? ==
-    alias equal? ==
+    alias_method :eql?, :==
+    alias_method :equal?, :==
 
     def hash
       [self.number, self.month.number, self.month.year, self.range].hash
