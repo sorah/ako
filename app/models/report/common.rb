@@ -1,3 +1,5 @@
+# rubocop:disable Blocks
+
 class Report
   module Common
     def total_expense
@@ -17,24 +19,32 @@ class Report
       return @_categories if @_categories
 
       expenses = self.expenses.includes(sub_category: :category)
-      # rubocop:disable Blocks
-      @_categories = Hash[expenses.group_by { |_| _.category }.map { |category, es|
-        [category.id, {
-          category: category,
+      @_categories = Hash[expenses.group_by(&:category).map { |category, es|
+        category(category, es)
+      }]
+    end
+
+    private
+
+    def category(category, es = category.expenses)
+      [category.id, {
+        category: category,
+        amount: es.map(&:amount).inject(:+),
+        fixed_amount: es.select(&:fixed?).map(&:amount).inject(:+) || 0,
+        variable_amount: es.select(&:variable?).map(&:amount).inject(:+) || 0,
+        sub_categories: sub_categories(es),
+      }]
+    end
+
+    def sub_categories(expenses)
+      Hash[expenses.group_by { |_| _.sub_category }.map { |sub_category, es|
+        [sub_category.id, {
+          sub_category: sub_category,
           amount: es.map(&:amount).inject(:+),
           fixed_amount: es.select(&:fixed?).map(&:amount).inject(:+) || 0,
           variable_amount: es.select(&:variable?).map(&:amount).inject(:+) || 0,
-          sub_categories: Hash[es.group_by { |_| _.sub_category }.map { |sub_category, _es|
-            [sub_category.id, {
-              sub_category: sub_category,
-              amount: _es.map(&:amount).inject(:+),
-              fixed_amount: _es.select(&:fixed?).map(&:amount).inject(:+) || 0,
-              variable_amount: _es.select(&:variable?).map(&:amount).inject(:+) || 0,
-            }]
-          }]
         }]
       }]
-      # rubocop:enable Blocks
     end
   end
 end
