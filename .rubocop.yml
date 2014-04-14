@@ -6,6 +6,13 @@ AllCops:
   Exclude:
     - bin/*
     - db/schema.rb
+    - db/migrate/*
+    - spec/**/*
+    - spec/*
+    - test/*
+    - test/**/*
+    - misc/*
+    - config/initializers/secret_token.rb
   RunRailsCops: true
 
 Documentation:
