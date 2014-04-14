@@ -126,11 +126,13 @@ module FiscalDate
     def self.in_with_fiscal_month(month)
       week_starts = Option[:week_starts]
 
-      month.range.inject([]) do |result, day|
+      days_in_weeks = month.range.inject([]) do |result, day|
         result << [day, day] if result.empty? || day.wday == week_starts
         result.last[1] = day
         result
-      end.map.with_index do |days, i|
+      end
+
+      days_in_weeks.map.with_index do |days, i|
         self.new(month, i.succ, days.first .. days.last)
       end
     end
