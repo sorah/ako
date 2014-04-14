@@ -4,6 +4,8 @@ class Place < ActiveRecord::Base
 
   scope :search_by_name, ->(query) { where('name like ?', query.gsub(/[%_]/, '\\\\\0') + '%') }
 
+  validates :name, presence: true
+
   def self.candidates_for_expense(query, name_only: false)
     return [] unless query
 
