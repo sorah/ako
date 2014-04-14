@@ -52,7 +52,7 @@ group :test, :development do
 
   gem 'pry'
 
-  gem 'rubocop'
+  gem 'rubocop', require: false
 end
 
 group :doc do
