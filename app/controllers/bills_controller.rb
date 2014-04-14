@@ -24,10 +24,7 @@ class BillsController < ApplicationController
   # POST /bills
   # POST /bills.json
   def create
-    meta = JSON.parse(bill_params.delete('meta')) if bill_params['meta']
-
     @bill = Bill.new(bill_params)
-    @bill.meta = meta if meta
 
     respond_to do |format|
       if @bill.save
@@ -43,11 +40,9 @@ class BillsController < ApplicationController
   # PATCH/PUT /bills/1
   # PATCH/PUT /bills/1.json
   def update
-    meta = JSON.parse(bill_params.delete('meta')) if bill_params['meta']
+    @bill.assign_attributes(bill_params)
 
     respond_to do |format|
-      @bill.assign_attributes(bill_params)
-      @bill.meta = meta if meta
       if @bill.save
         format.html { redirect_to @bill, notice: 'Bill was successfully updated.' }
         format.json { head :no_content }
@@ -78,10 +73,9 @@ class BillsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def bill_params
     bill = params.require(:bill).permit(:amount, :title, :billed_at, :meta, :place_id, :place_name, :account_id, :expense_id)
-    if bill[:place_name].present? && bill[:place_id].present?
-      bill.delete :place_name
-      bill.delete 'place_name'
-    end
+
+    bill.delete('place_name') if bill[:place_name].present? && bill[:place_id].present?
+    bill['meta'] = JSON.parse(bill.delete('meta')) if bill['meta']
 
     bill
   end
