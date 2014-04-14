@@ -37,7 +37,7 @@ gem 'nokogiri'
 
 gem 'kaminari'
 
-gem 'sigdump', :require => 'sigdump/setup'
+gem 'sigdump', require: 'sigdump/setup'
 
 gem 'http_status_exceptions'
 
