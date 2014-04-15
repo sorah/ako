@@ -38,7 +38,7 @@ section.bills
                 span.label.label-warning Unlinked
 
             .col-md-1.actions
-              = link_to edit_bill_path(bill), title: 'Edit' do
+              => link_to edit_bill_path(bill), title: 'Edit' do
                 i.icon-pencil.icon-large
               = link_to bill, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
                 i.icon-trash.icon-large
