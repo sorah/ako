@@ -44,6 +44,7 @@ gem 'http_status_exceptions'
 group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
+  gem 'spring-commands-rspec'
 
   gem 'database_rewinder'
   gem 'factory_girl_rails', '~> 4.0'
