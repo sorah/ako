@@ -17,7 +17,7 @@ class Bill < ActiveRecord::Base
   def expense_candidates
     expenses = Expense.where(
       paid_at: ((billed_at.beginning_of_day - 2.days)..(billed_at.end_of_day + 2.days))
-    ).load
+    ).load.to_a
 
     expenses.map! do |expense|
       [CandidationScoreForBillAndExpense.new(self, expense).score, expense]
