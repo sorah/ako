@@ -9,3 +9,19 @@ tr.subtotal {
     font-weight: bold;
   }
 }
+
+.report-budget {
+  .row {
+    .panel-heading {
+      font-weight: bold;
+    }
+
+    .panel-body {
+      font-size: 150%;
+      text-align: center;
+    }
+
+    .spent-breakdown {
+    }
+  }
+}

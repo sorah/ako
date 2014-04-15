@@ -1,35 +1,29 @@
 h1 Report: #{@report.year}/#{@report.month}
 
-section
+section.report-budget
   h2 Budget
 
   .row
-    .col-md-3 Budget:
-    .col-md-1
-    .col-md-3 Spent:
-    .col-md-1
-    .col-md-3 Remaining:
+    .col-md-3.budget
+      .panel.panel-default
+        .panel-heading Budget:
+        .panel-body = @report.budget
 
-  .row
-    .col-md-3
-      #{@report.budget}
-    .col-md-1 -
-    .col-md-3
-      #{@report.total_expense}
-    .col-md-1 =
-    .col-md-3
-      #{@report.remaining_budget}
+    .col-md-3.spent
+      .panel.panel-default
+        .panel-heading Spent:
+        .panel-body
+          .total-expense = @report.total_expense
+        .panel-footer
+          .spent-breakdown
+            | Fixed: #{@report.total_fixed_expense}
+            br
+            ' Variable: #{@report.total_variable_expense}
 
-  .row
-    .col-md-3
-    .col-md-1
-    .col-md-3
-      | Fixed: #{@report.total_fixed_expense}
-      br
-      ' Variable: #{@report.total_variable_expense}
-
-    .col-md-1
-    .col-md-3
+    .col-md-3.remaining
+      .panel.panel-default
+        .panel-heading Remaining:
+        .panel-body = @report.remaining_budget
 
 section
   h2 Summary by week
