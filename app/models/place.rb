@@ -9,7 +9,7 @@ class Place < ActiveRecord::Base
   def self.candidates_for_expense(query, name_only: false)
     return [] unless query
 
-    candidates = search_by_name(query).select(name_only ? [:id, :name] : '*')
+    candidates = search_by_name(query).select(name_only ? [:id, :name] : '*').load
 
     # For Japanese (CJK Unified Ideographs = \u4e00 - 9fff)
     if candidates.empty? && /[\u4e00-\u9fff]|\p{Hiragana}|\p{Katakana}/ =~ query
