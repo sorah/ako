@@ -117,7 +117,7 @@
 }
 
 @media (min-width: $screen-md-min) {
-  .paid-at {
+  .paid-at, .billed-at {
     text-align: right;
   }
 } 
