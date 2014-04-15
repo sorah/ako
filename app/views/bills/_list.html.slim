@@ -18,36 +18,28 @@ section.bills
 
         - bills.each do |bill|
           section.expenses-sub.row data-id=bill.id
-            time.billed-at datetime=bill.billed_at.xmlschema
-            .col-md-2 style='text-align: right;' 
-              time.billed-at datetime=bill.billed_at.xmlschema = l bill.billed_at, format: :short
+            .col-md-2.billed-at
+              time.billed_at datetime=bill.billed_at.xmlschema
+                = l bill.billed_at.to_date, format: :short
 
-            .col-md-1
-              -if bill.account
-                .account data-id=bill.account_id
-                  i> class=bill.account.icon_class 
-                  = bill.account.name
+            .col-md-1.account data-id=bill.account_id
+              - if bill.account
+                i class=bill.account.icon_class
+                span = bill.account.name
 
-            .col-md-1
-              .amount= bill.amount
+            .col-md-1.amount= bill.amount
+            .col-md-2.title= bill.title
+            .col-md-2.place data-id=bill.place_id = bill.place.try(&:name)
 
-            .col-md-2
-              .title= bill.title
-
-            .col-md-2
-              - if bill.place
-                td.place data-id=bill.place_id = bill.place.name
-
-            .col-md-3
+            .col-md-3.linked-expense data-id=bill.expense_id
               - if bill.expense
-                td.expense data-id=bill.expense_id = link_to(bill.expense.title, expense_path(bill.expense))
+                = link_to(bill.expense.title, expense_path(bill.expense))
               - else
                 span.label.label-warning Unlinked
 
-            .col-md-1
-              .actions
-                = link_to edit_bill_path(bill), title: 'Edit' do
-                  i.icon-pencil.icon-large
-                = link_to bill, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
-                  i.icon-remove.icon-large
+            .col-md-1.actions
+              = link_to edit_bill_path(bill), title: 'Edit' do
+                i.icon-pencil.icon-large
+              = link_to bill, method: :delete, data: {confirm: 'Are you sure?'}, title: 'Remove' do
+                i.icon-remove.icon-large
 

@@ -1,5 +1,5 @@
 init = ($) ->
-  $('.expenses').delegate('.expenses-sub', 'click', (e) ->
+  $('.expenses, .bills').delegate('.expenses-sub', 'click', (e) ->
     self = $(this)
     if self.hasClass('toggled')
       self.removeClass('toggled')

@@ -44,7 +44,7 @@
   padding-top: 4px;
   border-top: 1px solid $gray-lighter;
 
-  .comment, .place {
+  .comment, .title, .place, .linked-expense {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -73,7 +73,7 @@
       margin-bottom: 0;
     }
 
-    .paid-at, .account, .category {
+    .paid-at, .billed-at, .account, .category {
       display: inline;
     }
 
@@ -88,7 +88,7 @@
       }
     }
 
-    .comment {
+    .comment, .title, .linked-expense {
       display: none;
       overflow: visible;
       white-space: normal;
@@ -109,7 +109,7 @@
     }
 
     &.toggled {
-      .actions, .comment {
+      .actions, .comment, .title, .linked-expense {
         display: block;
       }
     }
