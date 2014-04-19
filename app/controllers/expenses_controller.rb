@@ -26,13 +26,19 @@ class ExpensesController < ApplicationController
   def create
     @expense = Expense.new(expense_params)
 
-    respond_to do |format|
+    if request.xhr?
       if @expense.save
-        format.html { redirect_to @expense, notice: 'Expense was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @expense }
+        card = render_to_string('_card', locals: {expense: @expense}, layout: false)
+        render json: {html: card, success: true}
       else
-        format.html { render action: 'new' }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
+        form = render_to_string('_form', layout: false)
+        render json: {html: form, success: false}
+      end
+    else
+      if @expense.save
+        redirect_to @expense, notice: 'Expense was successfully created.'
+      else
+        render action: 'new'
       end
     end
   end

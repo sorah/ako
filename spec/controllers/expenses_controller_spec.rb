@@ -95,6 +95,48 @@ describe ExpensesController, clean_db: true do
         expect(Expense.last.place_id).to eq place.id
       end
     end
+
+    context "when XHR" do
+      before do
+        request.env['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+        request.env['HTTP_ACCEPT'] = 'text/html'
+      end
+
+      context "with valid attributes" do
+        it "renders card" do
+          post :create, {:expense => valid_attributes}, valid_session
+
+          expect(response.code).to eq '200'
+          expect(response.content_type).to eq 'application/json'
+
+          expect(response).to render_template(
+            '_card',
+            locals: { expense: Expense.last },
+            layout: false
+          )
+
+          json = JSON.parse(response.body)
+          expect(json['html']).to be_a_kind_of(String)
+          expect(json['success']).to be_true
+        end
+      end
+
+      context "with invalid attributes" do
+        it "renders card" do
+          post :create, {:expense => {comment: 'only'}}, valid_session
+
+          expect(response.code).to eq '200'
+          expect(response.content_type).to eq 'application/json'
+
+          expect(response).to render_template('_form', layout: false)
+          expect(assigns(:expense)).to be_a(Expense)
+
+          json = JSON.parse(response.body)
+          expect(json['html']).to be_a_kind_of(String)
+          expect(json['success']).to be_false
+        end
+      end
+    end
   end
 
   describe "PUT update" do

@@ -57,3 +57,5 @@
 
     - @expense.bills.each do |bill|
       = render 'bills/card', bill: bill
+
+= render 'card', expense: @expense
