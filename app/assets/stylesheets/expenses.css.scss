@@ -142,13 +142,19 @@
 }
 
 .expense-card {
-  .attributes .name {
-    text-align: right;
+  .attributes {
+    display: inline-block;
+
+    .amount {
+      font-size: 180%;
+    }
+  }
+  .actions {
+    float: right;
   }
 
   .actions .btn {
     display: block;
-    width: 50%;
     text-align: center;
     margin-left: auto;
     margin-right: auto;

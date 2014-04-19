@@ -1,44 +1,27 @@
 .panel.panel-default.expense.expense-card
   .panel-heading= expense.title
   .panel-body
-    .row
-      .col-md-10.attributes
-        .row
-          .name.col-md-2
-            | Paid at:
-          .value.col-md-10
-            = expense.paid_at
-        .row
-          .name.col-md-2
-            | Amount:
-          .value.col-md-10
-            = expense.amount
-        .row
-          .name.col-md-2
-            | Place:
-          .value.col-md-10
-            - if expense.place
-              = link_to expense.place.name, expense.place
-        .row
-          .name.col-md-2
-            | Category:
-          .value.col-md-10
-            - if expense.sub_category
-              = link_to expense.category do
-                i> class=expense.category.icon_class
-                | #{expense.category.name} - #{expense.sub_category.name}
-        .row
-          .name.col-md-2
-            | Account:
-          .value.col-md-10
-            - if expense.account
-              = link_to expense.account do
-                i> class=expense.account.icon_class
+    .attributes
+      .amount
+        = expense.amount
+      .place
+        - if expense.place
+          = link_to expense.place.name, expense.place
+      .category
+        - if expense.sub_category
+          = link_to expense.category do
+            i> class=expense.category.icon_class
+            | #{expense.category.name} - #{expense.sub_category.name}
+      .account
+        - if expense.account
+          = link_to expense.account do
+            i> class=expense.account.icon_class
                 = expense.account.name
-      .col-md-2.actions
-        => link_to expense, title: 'Show', class: 'btn btn-default' do
-          i.icon-info-sign.icon-large>
-          | Show
-        => link_to edit_expense_path(expense), title: 'Edit', class: 'btn btn-default' do
-          i.icon-pencil>
-          | Edit
+
+    .actions
+      => link_to expense, title: 'Show', class: 'btn btn-default' do
+        i.icon-info-sign.icon-large>
+        | Show
+      => link_to edit_expense_path(expense), title: 'Edit', class: 'btn btn-default' do
+        i.icon-pencil>
+        | Edit
