@@ -189,12 +189,12 @@ DEPENDENCIES
   database_rewinder
   factory_girl_rails (~> 4.0)
   font-awesome-rails (= 3.2.1.2)
-  http_status_exceptions
+  http_status_exceptions (~> 0.3.0)
   jbuilder (~> 1.2)
-  jquery-rails
-  kaminari
+  jquery-rails (~> 3.1.0)
+  kaminari (~> 0.15.1)
   mysql2
-  nokogiri
+  nokogiri (~> 1.6.1)
   pry
   puma
   quiet_assets
@@ -204,10 +204,10 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   sigdump
-  slim-rails
+  slim-rails (~> 2.1.4)
   spring
   spring-commands-rspec
   sqlite3
   turbolinks
   uglifier (>= 1.3.0)
-  weak_parameters
+  weak_parameters (>= 0.1.4)
