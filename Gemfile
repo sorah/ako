@@ -41,6 +41,8 @@ gem 'sigdump', require: 'sigdump/setup'
 
 gem 'http_status_exceptions'
 
+gem 'weak_parameters'
+
 group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
