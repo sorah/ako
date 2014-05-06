@@ -21,6 +21,7 @@ module Ako
     end
 
     config.autoload_paths << Rails.root.join('lib', 'autoload')
+    config.autoload_paths << Rails.root.join('app', 'api')
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

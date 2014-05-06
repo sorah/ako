@@ -1,4 +1,6 @@
 Ako::Application.routes.draw do
+  mount ApplicationApi => '/api'
+
   root 'dashboard#index'
 
   resources :bills
