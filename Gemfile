@@ -45,7 +45,7 @@ gem 'weak_parameters', '>= 0.1.4'
 
 gem 'garage', git: 'https://github.com/cookpad/garage'
 # gem 'responders', '~> 2.0'
-
+#
 group :test, :development do
   gem 'spring'
   gem 'rspec-rails'
@@ -59,6 +59,8 @@ group :test, :development do
   gem 'pry'
 
   gem 'rubocop', require: false
+  gem 'stackprof'
+  gem 'rack-lineprof'
 end
 
 group :doc do

@@ -34,4 +34,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  #
+  config.middleware.use StackProf::Middleware, enabled: true, mode: :cpu, interval: 1000, save_every: 5
+  config.middleware.use Rack::Lineprof
 end
