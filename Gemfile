@@ -43,7 +43,8 @@ gem 'http_status_exceptions', '~> 0.3.0'
 
 gem 'weak_parameters', '>= 0.1.4'
 
-gem 'grape', '~> 0.7.0'
+gem 'garage', git: 'https://github.com/cookpad/garage'
+# gem 'responders', '~> 2.0'
 
 group :test, :development do
   gem 'spring'
