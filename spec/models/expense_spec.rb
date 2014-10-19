@@ -146,6 +146,14 @@ describe Expense do
       end
     end
 
+    context "when sub_category is not given" do
+      let(:sub_category) { nil }
+
+      it "returns nil" do
+        expect(expense.category).to be_nil
+      end
+    end
+
     describe "reloading" do
       let(:another_sub_category) { create(:sub_category, name: '2') }
 
