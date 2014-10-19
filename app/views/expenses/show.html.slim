@@ -52,6 +52,11 @@
             i> class=@expense.account.icon_class
             = @expense.account.name
 
+  section.meta
+    pre
+      code
+        = @expense.meta.to_yaml
+
   section.bills
     h2 Related bills
 
