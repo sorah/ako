@@ -31,10 +31,12 @@ init_expense_remote_form = ($) ->
       else
         error = self.find('.error_explanation')
         if error.length == 0
-          error = $('<div>').addClass('error_explanation')
-          self.prepend(error)
+          error = $('<div>')
+          self.append(error)
 
-        new_error = $.parseHTML(data.html)[0].querySelector('.error_explanation').innerHTML
+        received_error = $.parseHTML(data.html)[0].querySelector('.error_explanation')
+        error.attr('class', received_error.className)
+        new_error = received_error.innerHTML
 
         error.html(new_error)
 
